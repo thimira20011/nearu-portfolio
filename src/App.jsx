@@ -1,24 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // === Icon Components (Simulated Lucide Icons for aesthetic appeal) ===
 
-const RocketIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.75-1.99.04-2.67l.08.07c-2.45-2.45-3.26-3.76-3.8-5.32c-.17-.49-.13-1.01.12-1.39l4.5-4.5c.38-.25.9-.28 1.39-.12c1.56.54 2.87 1.35 5.32 3.8l-.07-.08c.68-.7.73-1.85.04-2.58l.08.07c-1.26-1.5-5-2-5-2s-.5-3.74-2-5c-.84-.71-1.99-.75-2.67-.04l.07.08c-2.45 2.45-3.76 3.26-5.32 3.8c-.49.17-1.01.13-1.39-.12L2.09 9.39c-.25-.38-.28-.9-.12-1.39c.54-1.56 1.35-2.87 3.8-5.32l-.07-.08c.7-.68 1.85-.73 2.58-.04l-.08.07c1.5 1.26 2 5 2 5s3.74.5 5 2c.71.84.75 1.99.04 2.67l.08.07c2.45 2.45 3.26 3.76 3.8 5.32c.17.49.13 1.01-.12 1.39l-4.5 4.5c-.38.25-.9.28-1.39.12c-1.56-.54-2.87-1.35-5.32-3.8l.07.08c-.68.7-.73 1.85-.04 2.58z"/></svg>);
+const RocketIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.75-1.99.04-2.67l.08.07c-2.45-2.45-3.26-3.76-3.8-5.32c-.17-.49-.13-1.01.12-1.39l4.5-4.5c.38-.25.9-.28 1.39-.12c1.56.54 2.87 1.35 5.32 3.8l-.07-.08c.68-.7.73-1.85.04-2.58l.08.07c-1.26-1.5-5-2-5-2s-.5-3.74-2-5c-.84-.71-1.99-.75-2.67-.04l.07.08c-2.45 2.45-3.76 3.26-5.32 3.8c-.49.17-1.01.13-1.39-.12L2.09 9.39c-.25-.38-.28-.9-.12-1.39c.54-1.56 1.35-2.87 3.8-5.32l-.07-.08c.7-.68 1.85-.73 2.58-.04l-.08.07c1.5 1.26 2 5 2 5s3.74.5 5 2c.71.84.75-1.99.04-2.67l.08.07c2.45 2.45 3.26 3.76 3.8 5.32c.17.49.13 1.01-.12 1.39l-4.5 4.5c-.38.25-.9.28-1.39.12c-1.56-.54-2.87-1.35-5.32-3.8l.07.08c-.68.7-.73 1.85-.04 2.58z"/></svg>);
 const ShieldIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>);
 const CodeIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>);
 const CloudIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19H17a5 5 0 0 0-4.5-5h-1a5 5 0 0 0-4.5 5H4a4 4 0 0 1-.5-8.5 4 4 0 0 1 7-3.5 6 6 0 0 1 10 2.5 5.5 5.5 0 0 1-.5 10z"/></svg>);
 const TerminalIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>);
 const DollarSignIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>);
 const UsersIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M17 14v-1a4 4 0 0 0-4-4h-2"/></svg>);
+const XIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>);
 
 
-// === Reusable Placeholder Image Component ===
-const PlaceholderImage = ({ width = '100%', height = '100%', className = '', shape = 'square', text = 'Image Placeholder' }) => {
-  const baseClasses = "flex items-center justify-center border-2 border-dashed border-gray-600 bg-gray-700/50 text-gray-400 font-semibold";
+// === Reusable Image Component (Handles Image URL and Placeholder) ===
+const PlaceholderImage = ({ 
+    width = '100%', 
+    height = '100%', 
+    className = '', 
+    shape = 'square', 
+    text = 'Image Placeholder', 
+    imageUrl = '',
+    objectFitClass = 'object-cover',
+    onClick
+}) => {
+  const baseClasses = "flex items-center justify-center border-2 border-dashed border-gray-600 text-gray-400 font-semibold";
   const shapeClasses = shape === 'circle' ? 'rounded-full' : 'rounded-xl';
+  // Add conditional styling for clickable images
+  // The 'onClick' prop existence determines if cursor/hover effects are applied.
+  const cursorClass = onClick ? 'cursor-zoom-in hover:shadow-lg hover:shadow-indigo-500/30 transition-shadow' : '';
+
+  if (imageUrl) {
+    // If a valid image URL is provided, render the image
+    return (
+      <img
+        src={imageUrl}
+        alt={text}
+        className={`${shapeClasses} w-full h-full ${objectFitClass} ${className} ${cursorClass}`}
+        style={{ width, height, minHeight: height, minWidth: width }}
+        loading="lazy"
+        onClick={onClick} // Attach click handler here (only if provided)
+        // Optional: Add onerror to handle broken links
+        onError={(e) => { 
+            e.currentTarget.onerror = null; 
+            e.currentTarget.style.display = 'none'; // Hide broken image
+            e.currentTarget.parentElement.innerHTML = `<div class="${baseClasses} ${shapeClasses} w-full h-full bg-red-900/50">Error Loading Image</div>`;
+        }}
+      />
+    );
+  }
+
+  // Otherwise, render the placeholder box
   return (
     <div
-      className={`${baseClasses} ${shapeClasses} ${className}`}
+      className={`${baseClasses} ${shapeClasses} ${className} bg-gray-700/50 ${cursorClass}`}
       style={{ width, height, minHeight: height, minWidth: width }}
+      onClick={onClick} // Attach click handler here (only if provided)
     >
       {/* Lucide Photo Icon */}
       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
@@ -26,6 +62,62 @@ const PlaceholderImage = ({ width = '100%', height = '100%', className = '', sha
     </div>
   );
 };
+
+
+// --- IMAGE MODAL COMPONENT (Lightbox) ---
+const ImageModal = ({ imageUrl, isOpen, onClose }) => {
+    // Added transition classes for a smooth fade-in/out effect
+    const modalClasses = isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none';
+
+    if (!imageUrl) return null; // Only render if there's a URL to show
+
+    return (
+        // Modal Overlay - Uses fixed position and z-index 50 to cover everything
+        <div 
+            className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ${modalClasses}`}
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }} // High opacity background for full focus
+            onClick={onClose} // Clicking the background closes the modal
+        >
+            {/* Close Button */}
+            <button
+                className="absolute top-4 right-4 text-white hover:text-indigo-400 transition-colors z-[51] p-2 rounded-full bg-gray-800/50"
+                onClick={onClose}
+                aria-label="Close image modal"
+            >
+                <XIcon className="w-8 h-8" />
+            </button>
+
+            {/* Modal Content - Click handler stops click events from propagating to the backdrop */}
+            <div 
+                className="max-w-full max-h-full overflow-hidden p-4" 
+            >
+                <img 
+                    src={imageUrl} 
+                    alt="Full View" 
+                    // Tailwind classes for responsive image display
+                    className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-indigo-400/50"
+                    loading="lazy"
+                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
+                />
+            </div>
+        </div>
+    );
+};
+// ------------------------------------------
+
+
+// --- PROJECT IMAGE URLS ---
+const LOGO_IMAGE_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/NearU%20logo.png?raw=true"; 
+const PRODUCT_SCREENSHOT_URL = "https://placehold.co/1280x720/1F2937/F3F4F6?text=Product+Screenshot"; 
+const AWS_DIAGRAM_URL = "https://raw.githubusercontent.com/thimira20011/nearuportfolio-images/refs/heads/main/Cloud.png"; 
+
+// --- TEAM MEMBER PHOTO URLS (Static, not for click-to-view) ---
+// Using mock URLs from the previous implementation
+const THIMIRA_PHOTO_URL = "https://placehold.co/600x600/8B5CF6/ffffff?text=TN"; 
+const MANJARI_PHOTO_URL = "https://placehold.co/600x400/34D399/ffffff?text=MB"; 
+const PAMAL_PHOTO_URL = "https://placehold.co/400x600/FCD34D/1F2937?text=PP"; 
+const UVINDU_PHOTO_URL = "https://placehold.co/600x600/FB7185/ffffff?text=UH"; 
+// ------------------------------
 
 
 // === Data Structure for Navigation ===
@@ -51,16 +143,23 @@ const Card = ({ title, icon: Icon, className, children }) => (
   </div>
 );
 
-// === Project Sections ===
+// --- Project Sections (Passed openImageModal prop) ---
 
-const IdeaSection = () => (
+const IdeaSection = ({ openImageModal }) => (
   <div className="space-y-6">
     
-    {/* NEW: Screenshot Placeholder */}
+    {/* Product Screenshot - CLICKABLE */}
     <Card title="Product Screenshot" className="p-0 bg-gray-700/30 overflow-hidden">
       <div className="aspect-video"> {/* Maintain 16:9 ratio for screenshot */}
-          <PlaceholderImage height="100%" width="100%" text="Website / Mobile App UI Screenshot" />
+          <PlaceholderImage 
+            height="100%" 
+            width="100%" 
+            text="Website / Mobile App UI Screenshot" 
+            imageUrl={PRODUCT_SCREENSHOT_URL} 
+            onClick={() => openImageModal(PRODUCT_SCREENSHOT_URL)} // Click handler IS applied
+          />
       </div>
+      <p className="text-center text-gray-400 text-sm py-2">Click to view full image.</p>
     </Card>
 
     <Card title="Project Name: NearU" className="bg-gray-700/50">
@@ -144,13 +243,20 @@ const TechSection = () => (
   </div>
 );
 
-const CloudSection = () => (
+const CloudSection = ({ openImageModal }) => (
   <div className="space-y-6">
     <Card title="Professional AWS Cloud Architecture">
-      {/* NEW: Diagram Placeholder */}
-      <div className="mt-4 mb-8 h-64 border-2 border-dashed border-indigo-500/50 rounded-xl">
-          <PlaceholderImage height="100%" width="100%" text="High-Level AWS Architecture Diagram" />
+      {/* AWS Diagram - CLICKABLE */}
+      <div className="mt-4 mb-2 h-64 border-2 border-dashed border-indigo-500/50 rounded-xl">
+          <PlaceholderImage 
+            height="100%" 
+            width="100%" 
+            text="High-Level AWS Architecture Diagram" 
+            imageUrl={AWS_DIAGRAM_URL} 
+            onClick={() => openImageModal(AWS_DIAGRAM_URL)} // Click handler IS applied
+          />
       </div>
+      <p className="text-center text-gray-400 text-sm mb-4">Click to view full diagram.</p>
 
       <p className="text-gray-300 mb-4">
         Our infrastructure is designed for scalability and reliability, utilizing <strong>AWS</strong> as the industry-standard platform.
@@ -241,7 +347,7 @@ const MonetizationSection = () => (
         </div>
         <div className="p-4 bg-purple-900/50 border border-purple-600 rounded-lg">
           <p className="font-bold text-lg text-purple-300">Tier 2: Premium Features</p>
-          <p className="text-sm text-gray-300 mt-1">Subscription for paid features like showing catalogs, promoting "like" features, and providing advanced analytics to the business.</p>
+          <p className="text-sm text-gray-300 mt-1">Subscription access to advanced analytics and promotion tools.</p>
         </div>
         <div className="p-4 bg-red-900/50 border border-red-600 rounded-lg">
           <p className="font-bold text-lg text-red-300">Tier 3: Ad Placement</p>
@@ -270,11 +376,56 @@ const componentMap = {
   MonetizationSection,
 };
 
+// Function to map team member names to their respective photo URL constants
+const getTeamPhotoUrl = (name) => {
+    switch (name) {
+        case 'Thimira Niranjaya': return THIMIRA_PHOTO_URL;
+        case 'Manjari Bhagya': return MANJARI_PHOTO_URL;
+        case 'Pamal Pahasara': return PAMAL_PHOTO_URL;
+        case 'Uvindu Heshan': return UVINDU_PHOTO_URL;
+        default: return ''; // Fallback to placeholder if name is not found
+    }
+};
+
 // === Main App Component ===
 const App = () => {
   const [activeSection, setActiveSection] = useState('idea');
+  // State for the Image Modal (Lightbox)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageUrl, setModalImageUrl] = useState('');
+
+  // Function to open the lightbox
+  const openImageModal = (url) => {
+      if (url) {
+          setModalImageUrl(url);
+          setIsModalOpen(true);
+      }
+  };
+
+  // Function to close the lightbox
+  const closeImageModal = () => {
+      setIsModalOpen(false);
+      setModalImageUrl('');
+  };
+  
+  // Hook to handle closing the modal on ESC key press
+  useEffect(() => {
+      const handleKeydown = (e) => {
+          if (e.key === 'Escape' && isModalOpen) {
+              closeImageModal();
+          }
+      };
+
+      document.addEventListener('keydown', handleKeydown);
+      
+      return () => {
+          document.removeEventListener('keydown', handleKeydown);
+      };
+  }, [isModalOpen]);
+
 
   // Find the component to render based on activeSection state
+  // Components that display clickable images get the openImageModal function passed as a prop
   const ActiveComponent = componentMap[portfolioSections.find(s => s.id === activeSection)?.component];
 
   // Team Data updated from PDF
@@ -289,11 +440,29 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 antialiased text-gray-100">
+        
+      {/* 1. RENDER MODAL outside the main content flow */}
+      <ImageModal 
+          isOpen={isModalOpen} 
+          imageUrl={modalImageUrl} 
+          onClose={closeImageModal} 
+      />
 
       {/* Header */}
       <header className="bg-gray-800 p-6 shadow-xl sticky top-0 z-20 border-b border-indigo-600/50">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white">
+          {/* LOGO AND PROJECT TITLE */}
+          <h1 className="text-4xl font-extrabold tracking-tight text-white flex items-center">
+            <div className="w-10 h-10 mr-3 flex-shrink-0">
+                <PlaceholderImage 
+                    width="100%"
+                    height="100%"
+                    text="LOGO" 
+                    shape="square" 
+                    className="!border-gray-500/50 text-xs"
+                    imageUrl={LOGO_IMAGE_URL} 
+                />
+            </div>
             <span className="text-indigo-400">Near</span>
             <span className="text-indigo-600">U</span>
           </h1>
@@ -338,7 +507,8 @@ const App = () => {
                 {portfolioSections.find(s => s.id === activeSection)?.title}
             </h2>
             <div className="transition-opacity duration-500 ease-in-out">
-                {ActiveComponent && <ActiveComponent />}
+                {/* Pass the modal function to the Idea and Cloud sections */}
+                {ActiveComponent && <ActiveComponent openImageModal={openImageModal} />} 
             </div>
         </section>
       </div>
@@ -349,9 +519,22 @@ const App = () => {
           <h3 className="text-3xl font-bold text-indigo-400 mb-6 flex items-center"><UsersIcon className="w-6 h-6 mr-3"/> Our Development Team</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {teamMembers.map((member, index) => (
-              // UPDATED: Added PlaceholderImage for each team member
               <div key={index} className="flex items-center p-4 bg-gray-900 rounded-xl shadow-lg border border-gray-700 transition-all hover:border-indigo-500">
-                <PlaceholderImage shape="circle" width="60px" height="60px" text="PFP" className="flex-shrink-0 mr-4 text-xs"/>
+                {/* Team member photos are static, no onClick or cursor-zoom-in applied */}
+                <div 
+                    className="flex-shrink-0 mr-4 focus:outline-none rounded-full"
+                >
+                    <PlaceholderImage 
+                        shape="circle" 
+                        width="60px" 
+                        height="60px" 
+                        objectFitClass="object-contain" 
+                        text={member.name.split(' ')[0][0] + member.name.split(' ')[1][0]} 
+                        className="text-xs"
+                        imageUrl={getTeamPhotoUrl(member.name)} 
+                        // IMPORTANT: The onClick prop is intentionally OMITTED here
+                    />
+                </div>
                 <div>
                   <p className="font-extrabold text-xl text-white">{member.name}</p>
                   <p className="text-sm text-indigo-400 font-medium mt-1">{member.role}</p>
@@ -375,7 +558,7 @@ const App = () => {
       <footer className="bg-black text-gray-500 p-4">
         <div className="max-w-7xl mx-auto text-center text-sm">
           <p>&copy; 2025 NearU Capstone Project. Built using ASP.NET Core, React.js, and AWS Free Tier.</p>
-          <a href="https://github.com/thimira20011/nearu-portfolio.git" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-400 transition-colors mt-1 inline-block">View GitHub Repository & Documentation</a>
+          <a href="https://github.com/YourGitHubUsername/NearU-Capstone" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-400 transition-colors mt-1 inline-block">View GitHub Repository & Documentation</a>
         </div>
       </footer>
     </div>
