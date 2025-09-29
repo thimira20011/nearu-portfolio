@@ -108,7 +108,7 @@ const ImageModal = ({ imageUrl, isOpen, onClose }) => {
 
 // --- PROJECT IMAGE URLS ---
 const LOGO_IMAGE_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/NearU%20logo.png?raw=true"; 
-const PRODUCT_SCREENSHOT_URL = "https://placehold.co/1280x720/1F2937/F3F4F6?text=Product+Screenshot"; 
+const PRODUCT_SCREENSHOT_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/Silk%20song.jpg?raw=true"; 
 const AWS_DIAGRAM_URL = "https://raw.githubusercontent.com/thimira20011/nearuportfolio-images/refs/heads/main/Cloud.png"; 
 
 // --- TEAM MEMBER PHOTO URLS (Static, not for click-to-view) ---
@@ -235,7 +235,7 @@ const TechSection = () => (
 
       <h4 className="text-xl font-semibold text-gray-200 mb-3">Frontend & UI/UX</h4>
       <div className="flex flex-wrap gap-3">
-        <span className="px-4 py-1 bg-indigo-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-indigo-400">React.js / Angular (Framework)</span>
+        <span className="px-4 py-1 bg-indigo-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-indigo-400">ASP.NET Razor pages (Framework)</span>
         <span className="px-4 py-1 bg-cyan-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-cyan-400">TailwindCSS (Responsive UI)</span>
         <span className="px-4 py-1 bg-pink-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-pink-400">Figma (UI/UX Diagrams)</span>
       </div>
