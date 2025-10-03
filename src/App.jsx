@@ -558,7 +558,7 @@ const App = () => {
       <footer className="bg-black text-gray-500 p-4">
         <div className="max-w-7xl mx-auto text-center text-sm">
           <p>&copy; 2025 NearU Capstone Project. Built using ASP.NET Core, React.js, and AWS Free Tier.</p>
-          <a href="https://github.com/YourGitHubUsername/NearU-Capstone" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-400 transition-colors mt-1 inline-block">View GitHub Repository & Documentation</a>
+          <a href="https://github.com/pamal29/NearU.git" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-400 transition-colors mt-1 inline-block">View GitHub Repository & Documentation</a>
         </div>
       </footer>
     </div>
