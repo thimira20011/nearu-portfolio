@@ -108,7 +108,7 @@ const ImageModal = ({ imageUrl, isOpen, onClose }) => {
 
 // --- PROJECT IMAGE URLS ---
 const LOGO_IMAGE_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/NearU%20logo.png?raw=true"; 
-const PRODUCT_SCREENSHOT_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/Silk%20song.jpg?raw=true"; 
+const PRODUCT_SCREENSHOT_URL ="https://github.com/thimira20011/nearuportfolio-images/blob/main/Product%20image.png?raw=true"; 
 const AWS_DIAGRAM_URL = "https://raw.githubusercontent.com/thimira20011/nearuportfolio-images/refs/heads/main/Cloud.png"; 
 
 // --- TEAM MEMBER PHOTO URLS (Static, not for click-to-view) ---
