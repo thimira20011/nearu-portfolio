@@ -10,6 +10,7 @@ const TerminalIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/s
 const DollarSignIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>);
 const UsersIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M17 14v-1a4 4 0 0 0-4-4h-2"/></svg>);
 const XIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>);
+const CalendarIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>);
 
 
 // === Reusable Image Component (Handles Image URL and Placeholder) ===
@@ -112,11 +113,13 @@ const PRODUCT_SCREENSHOT_URL ="https://github.com/thimira20011/nearuportfolio-im
 const AWS_DIAGRAM_URL = "https://raw.githubusercontent.com/thimira20011/nearuportfolio-images/refs/heads/main/Cloud.png"; 
 
 // --- TEAM MEMBER PHOTO URLS (Static, not for click-to-view) ---
-// Using mock URLs from the previous implementation
 const THIMIRA_PHOTO_URL = "https://placehold.co/600x600/8B5CF6/ffffff?text=TN"; 
 const MANJARI_PHOTO_URL = "https://placehold.co/600x400/34D399/ffffff?text=MB"; 
 const PAMAL_PHOTO_URL = "https://placehold.co/400x600/FCD34D/1F2937?text=PP"; 
 const UVINDU_PHOTO_URL = "https://placehold.co/600x600/FB7185/ffffff?text=UH"; 
+// --- NEW WORKFLOW PHOTO PLACEHOLDERS ---
+const WORK_PHOTO_1_URL = "https://placehold.co/600x400/3B82F6/ffffff?text=Team+Planning+Session";
+const WORK_PHOTO_2_URL = "https://placehold.co/600x400/10B981/ffffff?text=Code+Review+or+Testing";
 // ------------------------------
 
 
@@ -127,6 +130,7 @@ const portfolioSections = [
   { id: 'tech', title: 'Software Architecture', icon: CodeIcon, component: 'TechSection' },
   { id: 'cloud', title: 'AWS Cloud Strategy', icon: CloudIcon, component: 'CloudSection' },
   { id: 'process', title: 'Agile & DevOps (CI/CD)', icon: TerminalIcon, component: 'ProcessSection' },
+  { id: 'workflow', title: 'Workflow & Timeline', icon: CalendarIcon, component: 'WorkflowSection' }, // NEW SECTION ADDED
   { id: 'monetization', title: 'Monetization & Roadmap', icon: DollarSignIcon, component: 'MonetizationSection' },
 ];
 
@@ -334,6 +338,76 @@ const ProcessSection = () => (
   </div>
 );
 
+// --- NEW WORKFLOW & TIMELINE SECTION ---
+const WorkflowSection = ({ openImageModal }) => (
+  <div className="space-y-6">
+    <Card title="Project Timeline and Key Milestones" icon={CalendarIcon}>
+      <p className="text-gray-300 mb-6">
+        The project was executed over several months following the **Scrum** framework, with clearly defined stages and outcomes.
+      </p>
+
+      {/* Timeline Structure */}
+      <div className="relative border-l-4 border-indigo-600 space-y-12 ml-4 pl-6">
+        
+        {/* Milestone 1: Ideation & Planning (e.g., Sprint 1) */}
+        <div className="relative">
+          <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
+          <h4 className="text-xl font-bold text-indigo-300">Phase 1: Discovery & Foundation (e.g., Sep - Oct)</h4>
+          <p className="text-gray-400 mt-1">Defined **Product Backlog**, created **UI/UX Diagrams** (Figma), set up **AWS IAM** and initial **GitHub repository**. Established core tech stack and database schema.</p>
+          
+          <div className="mt-4 grid md:grid-cols-2 gap-4">
+            <Card title="Team Planning" className="p-3 bg-gray-700/50">
+              <PlaceholderImage 
+                height="200px" 
+                text="Team Meeting Photo" 
+                imageUrl={WORK_PHOTO_1_URL} 
+                onClick={() => openImageModal(WORK_PHOTO_1_URL)} 
+                className="w-full rounded-lg"
+              />
+            </Card>
+          </div>
+        </div>
+
+        {/* Milestone 2: Core Development & CI (e.g., Nov - Dec) */}
+        <div className="relative">
+          <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
+          <h4 className="text-xl font-bold text-indigo-300">Phase 2: Core API and Frontend Prototype (Sprints 2-4)</h4>
+          <p className="text-gray-400 mt-1">Built **ASP.NET Core API** endpoints for business registration and user search. Deployed the initial **React/Angular frontend** and implemented user authentication (JWT).</p>
+        </div>
+        
+        {/* Milestone 3: Feature Implementation & Testing (e.g., Jan - Feb) */}
+        <div className="relative">
+          <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
+          <h4 className="text-xl font-bold text-indigo-300">Phase 3: Integration & Testing</h4>
+          <p className="text-gray-400 mt-1">Integrated **AWS Lambda** for image processing. Finalized the **CI/CD pipeline** (CodePipeline). Executed **xUnit** (Unit) and **Playwright** (E2E) testing cycles to ensure stability.</p>
+          
+          <div className="mt-4 grid md:grid-cols-2 gap-4">
+            <Card title="Testing Session" className="p-3 bg-gray-700/50">
+              <PlaceholderImage 
+                height="200px" 
+                text="Debugging / Code Review" 
+                imageUrl={WORK_PHOTO_2_URL} 
+                onClick={() => openImageModal(WORK_PHOTO_2_URL)} 
+                className="w-full rounded-lg"
+              />
+            </Card>
+          </div>
+        </div>
+        
+        {/* Milestone 4: Finalization & Deployment (e.g., March) */}
+        <div className="relative">
+          <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
+          <h4 className="text-xl font-bold text-indigo-300">Phase 4: Final Deployment & Documentation</h4>
+          <p className="text-gray-400 mt-1">Finalized monetization logic and safety features. Deployed the application to **AWS Elastic Beanstalk** and created this **Project Portfolio** submission.</p>
+        </div>
+
+      </div>
+    </Card>
+  </div>
+);
+// -------------------------------------------
+
+
 const MonetizationSection = () => (
   <div className="space-y-6">
     <Card title="Multi-Tiered Monetization Plan">
@@ -373,6 +447,7 @@ const componentMap = {
   TechSection,
   CloudSection,
   ProcessSection,
+  WorkflowSection, // NEW MAP ENTRY
   MonetizationSection,
 };
 
@@ -507,7 +582,7 @@ const App = () => {
                 {portfolioSections.find(s => s.id === activeSection)?.title}
             </h2>
             <div className="transition-opacity duration-500 ease-in-out">
-                {/* Pass the modal function to the Idea and Cloud sections */}
+                {/* Pass the modal function to the Idea, Cloud, and Workflow sections */}
                 {ActiveComponent && <ActiveComponent openImageModal={openImageModal} />} 
             </div>
         </section>
