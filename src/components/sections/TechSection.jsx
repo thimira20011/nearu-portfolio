@@ -13,7 +13,7 @@ const TechSection = () => (
 
             <h4 className="text-xl font-semibold text-gray-200 mb-3">Frontend & UI/UX</h4>
             <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-1 bg-indigo-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-indigo-400">ASP.NET Razor pages (Framework)</span>
+                <span className="px-4 py-1 bg-indigo-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-indigo-400">React with TypeScript (Framework)</span>
                 <span className="px-4 py-1 bg-cyan-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-cyan-400">TailwindCSS (Responsive UI)</span>
                 <span className="px-4 py-1 bg-pink-600 text-white rounded-full font-medium transition-all hover:ring-2 ring-pink-400">Figma (UI/UX Diagrams)</span>
             </div>

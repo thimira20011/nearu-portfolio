@@ -140,7 +140,7 @@ const App = () => {
             <span className="text-indigo-400">Near</span>
             <span className="text-indigo-600">U</span>
           </h1>
-          <p className="mt-2 md:mt-0 text-indigo-300 text-xl font-medium">Local Business Marketplace (2025)</p>
+          <p className="mt-2 md:mt-0 text-indigo-300 text-xl font-medium">University Business Marketplace (2025)</p>
         </div>
       </header>
 
@@ -219,10 +219,16 @@ const App = () => {
 
           {/* Supervisor */}
           <div className="mt-8">
-            <h3 className="text-2xl font-bold text-indigo-400 mb-4">Project Supervisor</h3>
-            <div className="p-4 bg-gray-700 rounded-xl shadow-md max-w-md border-l-4 border-indigo-500">
-              <p className="font-extrabold text-xl text-white">{supervisor.name}</p>
-              <p className="text-md text-indigo-300">{supervisor.title}</p>
+            <h3 className="text-2xl font-bold text-indigo-400 mb-4">Project Supervision</h3>
+            <div className="grid md:grid-cols-2 gap-4 max-w-2xl">
+              <div className="p-4 bg-gray-700 rounded-xl shadow-md border-l-4 border-indigo-500">
+                <p className="font-extrabold text-xl text-white">{supervisor.name}</p>
+                <p className="text-md text-indigo-300">{supervisor.title}</p>
+              </div>
+              <div className="p-4 bg-gray-700 rounded-xl shadow-md border-l-4 border-indigo-500">
+                <p className="font-extrabold text-xl text-white">Mr. Ravindu Dharmadasa</p>
+                <p className="text-md text-indigo-300">Project Mentor</p>
+              </div>
             </div>
           </div>
         </div>
