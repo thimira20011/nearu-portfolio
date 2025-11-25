@@ -2,27 +2,27 @@ import React, { useState, useEffect } from 'react';
 
 // === Icon Components (Simulated Lucide Icons for aesthetic appeal) ===
 
-const RocketIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.75-1.99.04-2.67l.08.07c-2.45-2.45-3.26-3.76-3.8-5.32c-.17-.49-.13-1.01.12-1.39l4.5-4.5c.38-.25.9-.28 1.39-.12c1.56.54 2.87 1.35 5.32 3.8l-.07-.08c.68-.7.73-1.85.04-2.58l.08.07c-1.26-1.5-5-2-5-2s-.5-3.74-2-5c-.84-.71-1.99-.75-2.67-.04l.07.08c-2.45 2.45-3.76 3.26-5.32 3.8c-.49.17-1.01.13-1.39-.12L2.09 9.39c-.25-.38-.28-.9-.12-1.39c.54-1.56 1.35-2.87 3.8-5.32l-.07-.08c.7-.68 1.85-.73 2.58-.04l-.08.07c1.5 1.26 2 5 2 5s3.74.5 5 2c.71.84.75-1.99.04-2.67l.08.07c2.45 2.45 3.26 3.76 3.8 5.32c.17.49.13 1.01-.12 1.39l-4.5 4.5c-.38.25-.9.28-1.39.12c-1.56-.54-2.87-1.35-5.32-3.8l.07.08c-.68.7-.73 1.85-.04 2.58z"/></svg>);
-const ShieldIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>);
-const CodeIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>);
-const CloudIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19H17a5 5 0 0 0-4.5-5h-1a5 5 0 0 0-4.5 5H4a4 4 0 0 1-.5-8.5 4 4 0 0 1 7-3.5 6 6 0 0 1 10 2.5 5.5 5.5 0 0 1-.5 10z"/></svg>);
-const TerminalIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>);
-const DollarSignIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>);
-const UsersIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M17 14v-1a4 4 0 0 0-4-4h-2"/></svg>);
-const XIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>);
-const CalendarIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>);
+const RocketIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.75-1.99.04-2.67l.08.07c-2.45-2.45-3.26-3.76-3.8-5.32c-.17-.49-.13-1.01.12-1.39l4.5-4.5c.38-.25.9-.28 1.39-.12c1.56.54 2.87 1.35 5.32 3.8l-.07-.08c.68-.7.73-1.85.04-2.58l.08.07c-1.26-1.5-5-2-5-2s-.5-3.74-2-5c-.84-.71-1.99-.75-2.67-.04l.07.08c-2.45 2.45-3.76 3.26-5.32 3.8c-.49.17-1.01.13-1.39-.12L2.09 9.39c-.25-.38-.28-.9-.12-1.39c.54-1.56 1.35-2.87 3.8-5.32l-.07-.08c.7-.68 1.85-.73 2.58-.04l-.08.07c1.5 1.26 2 5 2 5s3.74.5 5 2c.71.84.75-1.99.04-2.67l.08.07c2.45 2.45 3.26 3.76 3.8 5.32c.17.49.13 1.01-.12 1.39l-4.5 4.5c-.38.25-.9.28-1.39.12c-1.56-.54-2.87-1.35-5.32-3.8l.07.08c-.68.7-.73 1.85-.04 2.58z" /></svg>);
+const ShieldIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>);
+const CodeIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>);
+const CloudIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19H17a5 5 0 0 0-4.5-5h-1a5 5 0 0 0-4.5 5H4a4 4 0 0 1-.5-8.5 4 4 0 0 1 7-3.5 6 6 0 0 1 10 2.5 5.5 5.5 0 0 1-.5 10z" /></svg>);
+const TerminalIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" /></svg>);
+const DollarSignIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>);
+const UsersIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><path d="M17 14v-1a4 4 0 0 0-4-4h-2" /></svg>);
+const XIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>);
+const CalendarIcon = (props) => (<svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>);
 
 
 // === Reusable Image Component (Handles Image URL and Placeholder) ===
-const PlaceholderImage = ({ 
-    width = '100%', 
-    height = '100%', 
-    className = '', 
-    shape = 'square', 
-    text = 'Image Placeholder', 
-    imageUrl = '',
-    objectFitClass = 'object-cover',
-    onClick
+const PlaceholderImage = ({
+  width = '100%',
+  height = '100%',
+  className = '',
+  shape = 'square',
+  text = 'Image Placeholder',
+  imageUrl = '',
+  objectFitClass = 'object-cover',
+  onClick
 }) => {
   const baseClasses = "flex items-center justify-center border-2 border-dashed border-gray-600 text-gray-400 font-semibold";
   const shapeClasses = shape === 'circle' ? 'rounded-full' : 'rounded-xl';
@@ -41,10 +41,10 @@ const PlaceholderImage = ({
         loading="lazy"
         onClick={onClick} // Attach click handler here (only if provided)
         // Optional: Add onerror to handle broken links
-        onError={(e) => { 
-            e.currentTarget.onerror = null; 
-            e.currentTarget.style.display = 'none'; // Hide broken image
-            e.currentTarget.parentElement.innerHTML = `<div class="${baseClasses} ${shapeClasses} w-full h-full bg-red-900/50">Error Loading Image</div>`;
+        onError={(e) => {
+          e.currentTarget.onerror = null;
+          e.currentTarget.style.display = 'none'; // Hide broken image
+          e.currentTarget.parentElement.innerHTML = `<div class="${baseClasses} ${shapeClasses} w-full h-full bg-red-900/50">Error Loading Image</div>`;
         }}
       />
     );
@@ -67,56 +67,55 @@ const PlaceholderImage = ({
 
 // --- IMAGE MODAL COMPONENT (Lightbox) ---
 const ImageModal = ({ imageUrl, isOpen, onClose }) => {
-    // Added transition classes for a smooth fade-in/out effect
-    const modalClasses = isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none';
+  // Added transition classes for a smooth fade-in/out effect
+  const modalClasses = isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none';
 
-    if (!imageUrl) return null; // Only render if there's a URL to show
+  if (!imageUrl) return null; // Only render if there's a URL to show
 
-    return (
-        // Modal Overlay - Uses fixed position and z-index 50 to cover everything
-        <div 
-            className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ${modalClasses}`}
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }} // High opacity background for full focus
-            onClick={onClose} // Clicking the background closes the modal
-        >
-            {/* Close Button */}
-            <button
-                className="absolute top-4 right-4 text-white hover:text-indigo-400 transition-colors z-[51] p-2 rounded-full bg-gray-800/50"
-                onClick={onClose}
-                aria-label="Close image modal"
-            >
-                <XIcon className="w-8 h-8" />
-            </button>
+  return (
+    // Modal Overlay - Uses fixed position and z-index 50 to cover everything
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ${modalClasses}`}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }} // High opacity background for full focus
+      onClick={onClose} // Clicking the background closes the modal
+    >
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-white hover:text-indigo-400 transition-colors z-[51] p-2 rounded-full bg-gray-800/50"
+        onClick={onClose}
+        aria-label="Close image modal"
+      >
+        <XIcon className="w-8 h-8" />
+      </button>
 
-            {/* Modal Content - Click handler stops click events from propagating to the backdrop */}
-            <div 
-                className="max-w-full max-h-full overflow-hidden p-4" 
-            >
-                <img 
-                    src={imageUrl} 
-                    alt="Full View" 
-                    // Tailwind classes for responsive image display
-                    className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-indigo-400/50"
-                    loading="lazy"
-                    onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
-                />
-            </div>
-        </div>
-    );
+      {/* Modal Content - Click handler stops click events from propagating to the backdrop */}
+      <div
+        className="max-w-full max-h-full overflow-hidden p-4"
+      >
+        <img
+          src={imageUrl}
+          alt="Full View"
+          // Tailwind classes for responsive image display
+          className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-indigo-400/50"
+          loading="lazy"
+          onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
+        />
+      </div>
+    </div>
+  );
 };
 // ------------------------------------------
 
 
 // --- PROJECT IMAGE URLS ---
-const LOGO_IMAGE_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/NearU%20logo.png?raw=true"; 
-const PRODUCT_SCREENSHOT_URL ="https://github.com/thimira20011/nearuportfolio-images/blob/main/Product%20image.png?raw=true"; 
-const AWS_DIAGRAM_URL = "https://raw.githubusercontent.com/thimira20011/nearuportfolio-images/refs/heads/main/Cloud.png"; 
-
+const LOGO_IMAGE_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/NearU%20logo.png?raw=true";
+const PRODUCT_SCREENSHOT_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/Product%20image.png?raw=true";
+const AZURE_DIAGRAM_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/Untitled%20Diagram.drawio%20(2).png?raw=true";
 // --- TEAM MEMBER PHOTO URLS (Static, not for click-to-view) ---
-const THIMIRA_PHOTO_URL = "https://placehold.co/600x600/8B5CF6/ffffff?text=TN"; 
-const MANJARI_PHOTO_URL = "https://placehold.co/600x400/34D399/ffffff?text=MB"; 
-const PAMAL_PHOTO_URL = "https://placehold.co/400x600/FCD34D/1F2937?text=PP"; 
-const UVINDU_PHOTO_URL = "https://placehold.co/600x600/FB7185/ffffff?text=UH"; 
+const THIMIRA_PHOTO_URL = "https://placehold.co/600x600/8B5CF6/ffffff?text=TN";
+const MANJARI_PHOTO_URL = "https://placehold.co/600x400/34D399/ffffff?text=MB";
+const PAMAL_PHOTO_URL = "https://placehold.co/400x600/FCD34D/1F2937?text=PP";
+const UVINDU_PHOTO_URL = "https://placehold.co/600x600/FB7185/ffffff?text=UH";
 // --- NEW WORKFLOW PHOTO PLACEHOLDERS ---
 const WORK_PHOTO_1_URL = "https://placehold.co/600x400/3B82F6/ffffff?text=Team+Planning+Session";
 const WORK_PHOTO_2_URL = "https://placehold.co/600x400/10B981/ffffff?text=Code+Review+or+Testing";
@@ -128,7 +127,7 @@ const portfolioSections = [
   { id: 'idea', title: 'Project Overview', icon: RocketIcon, component: 'IdeaSection' },
   { id: 'features', title: 'Core Features & Safety', icon: ShieldIcon, component: 'FeaturesSection' },
   { id: 'tech', title: 'Software Architecture', icon: CodeIcon, component: 'TechSection' },
-  { id: 'cloud', title: 'AWS Cloud Strategy', icon: CloudIcon, component: 'CloudSection' },
+  { id: 'cloud', title: 'Azure Cloud Strategy', icon: CloudIcon, component: 'CloudSection' },
   { id: 'process', title: 'Agile & DevOps (CI/CD)', icon: TerminalIcon, component: 'ProcessSection' },
   { id: 'workflow', title: 'Workflow & Timeline', icon: CalendarIcon, component: 'WorkflowSection' }, // NEW SECTION ADDED
   { id: 'monetization', title: 'Monetization & Roadmap', icon: DollarSignIcon, component: 'MonetizationSection' },
@@ -151,17 +150,17 @@ const Card = ({ title, icon: Icon, className, children }) => (
 
 const IdeaSection = ({ openImageModal }) => (
   <div className="space-y-6">
-    
+
     {/* Product Screenshot - CLICKABLE */}
     <Card title="Product Screenshot" className="p-0 bg-gray-700/30 overflow-hidden">
       <div className="aspect-video"> {/* Maintain 16:9 ratio for screenshot */}
-          <PlaceholderImage 
-            height="100%" 
-            width="100%" 
-            text="Website / Mobile App UI Screenshot" 
-            imageUrl={PRODUCT_SCREENSHOT_URL} 
-            onClick={() => openImageModal(PRODUCT_SCREENSHOT_URL)} // Click handler IS applied
-          />
+        <PlaceholderImage
+          height="100%"
+          width="100%"
+          text="Website / Mobile App UI Screenshot"
+          imageUrl={PRODUCT_SCREENSHOT_URL}
+          onClick={() => openImageModal(PRODUCT_SCREENSHOT_URL)} // Click handler IS applied
+        />
       </div>
       <p className="text-center text-gray-400 text-sm py-2">Click to view full image.</p>
     </Card>
@@ -249,44 +248,44 @@ const TechSection = () => (
 
 const CloudSection = ({ openImageModal }) => (
   <div className="space-y-6">
-    <Card title="Professional AWS Cloud Architecture">
-      {/* AWS Diagram - CLICKABLE */}
+    <Card title="Professional Azure Cloud Architecture">
+      {/* Azure Diagram - CLICKABLE */}
       <div className="mt-4 mb-2 h-64 border-2 border-dashed border-indigo-500/50 rounded-xl">
-          <PlaceholderImage 
-            height="100%" 
-            width="100%" 
-            text="High-Level AWS Architecture Diagram" 
-            imageUrl={AWS_DIAGRAM_URL} 
-            onClick={() => openImageModal(AWS_DIAGRAM_URL)} // Click handler IS applied
-          />
+        <PlaceholderImage
+          height="100%"
+          width="100%"
+          text="High-Level Azure Architecture Diagram"
+          imageUrl={AZURE_DIAGRAM_URL}
+          onClick={() => openImageModal(AZURE_DIAGRAM_URL)} // Click handler IS applied
+        />
       </div>
       <p className="text-center text-gray-400 text-sm mb-4">Click to view full diagram.</p>
 
       <p className="text-gray-300 mb-4">
-        Our infrastructure is designed for scalability and reliability, utilizing <strong>AWS</strong> as the industry-standard platform.
+        Our infrastructure is designed for scalability and reliability, utilizing <strong>Azure</strong> as the industry-standard platform.
       </p>
       <div className="grid lg:grid-cols-2 gap-4">
         <div className="bg-gray-700 p-4 rounded-lg border-l-4 border-indigo-500">
           <p className="font-bold text-indigo-300">Application Layer</p>
           <ul className="text-sm text-gray-400 list-disc list-inside ml-2 mt-1">
-            <li><b>Compute:</b> Elastic Beanstalk (or EC2 + Docker)</li>
-            <li><b>Traffic:</b> Application Load Balancer (ALB)</li>
-            <li><b>Delivery:</b> CloudFront (CDN for static caching)</li>
+            <li><b>Compute:</b> Azure App Service (or VM + Docker)</li>
+            <li><b>Traffic:</b> Azure Application Gateway</li>
+            <li><b>Delivery:</b> Azure CDN (for static caching)</li>
           </ul>
         </div>
         <div className="bg-gray-700 p-4 rounded-lg border-l-4 border-yellow-500">
           <p className="font-bold text-yellow-300">Data & Storage</p>
           <ul className="text-sm text-gray-400 list-disc list-inside ml-2 mt-1">
-            <li><b>Relational DB:</b> Amazon RDS (SQL Server)</li>
-            <li><b>File Assets:</b> Amazon S3 (Images, menus, docs)</li>
-            <li><b>Security:</b> ACM (SSL/TLS) and IAM (Role Mgmt)</li>
+            <li><b>Relational DB:</b> Azure SQL Database</li>
+            <li><b>File Assets:</b> Azure Blob Storage (Images, menus, docs)</li>
+            <li><b>Security:</b> App Service Certificates and Entra ID (Role Mgmt)</li>
           </ul>
         </div>
         <div className="bg-gray-700 p-4 rounded-lg border-l-4 border-red-500 col-span-full">
-          <p className="font-bold text-red-300">Event-Driven Serverless Layer (AWS Lambda)</p>
+          <p className="font-bold text-red-300">Event-Driven Serverless Layer (Azure Functions)</p>
           <ul className="text-sm text-gray-400 list-disc list-inside ml-2 mt-1">
-            <li><b>Triggers:</b> Image processing (resize/compress before S3 storage).</li>
-            <li><b>Notifications:</b> Email/SMS for order confirmations via <b>SES</b> and <b>SNS</b>.</li>
+            <li><b>Triggers:</b> Image processing (resize/compress before Blob storage).</li>
+            <li><b>Notifications:</b> Email/SMS for order confirmations via <b>Azure Communication Services</b>.</li>
             <li><b>Maintenance:</b> Scheduled tasks (cleanup expired subscriptions).</li>
           </ul>
         </div>
@@ -316,15 +315,15 @@ const ProcessSection = () => (
         </div>
       </div>
     </Card>
-    <Card title="CI/CD Pipeline (AWS CodePipeline)">
+    <Card title="CI/CD Pipeline (Azure Pipelines)">
       <div className="grid md:grid-cols-2 gap-4">
         <div className="p-4 border border-indigo-600 bg-indigo-900/50 rounded-lg transition-all hover:bg-indigo-900">
-          <p className="font-bold text-indigo-300 flex items-center"><TerminalIcon className="w-5 h-5 mr-2"/> CI (Continuous Integration)</p>
-          <p className="text-sm text-gray-300 mt-1">Code is version controlled on <strong>GitHub</strong>. <strong>xUnit/NUnit</strong> tests are automatically run via <strong>AWS CodeBuild</strong> on every push.</p>
+          <p className="font-bold text-indigo-300 flex items-center"><TerminalIcon className="w-5 h-5 mr-2" /> CI (Continuous Integration)</p>
+          <p className="text-sm text-gray-300 mt-1">Code is version controlled on <strong>GitHub</strong>. <strong>xUnit/NUnit</strong> tests are automatically run via <strong>Azure Pipelines</strong> on every push.</p>
         </div>
         <div className="p-4 border border-green-600 bg-green-900/50 rounded-lg transition-all hover:bg-green-900">
-          <p className="font-bold text-green-300 flex items-center"><RocketIcon className="w-5 h-5 mr-2"/> CD (Continuous Deployment)</p>
-          <p className="text-sm text-gray-300 mt-1">On successful test pass, <strong>AWS CodePipeline</strong> automatically deploys the build (potentially Dockerized via <strong>ECR</strong>) to Elastic Beanstalk, maintaining a perpetually live environment.</p>
+          <p className="font-bold text-green-300 flex items-center"><RocketIcon className="w-5 h-5 mr-2" /> CD (Continuous Deployment)</p>
+          <p className="text-sm text-gray-300 mt-1">On successful test pass, <strong>Azure Pipelines</strong> automatically deploys the build (potentially Dockerized via <strong>Azure Container Registry</strong>) to Azure App Service, maintaining a perpetually live environment.</p>
         </div>
       </div>
     </Card>
@@ -348,20 +347,20 @@ const WorkflowSection = ({ openImageModal }) => (
 
       {/* Timeline Structure */}
       <div className="relative border-l-4 border-indigo-600 space-y-12 ml-4 pl-6">
-        
+
         {/* Milestone 1: Ideation & Planning (e.g., Sprint 1) */}
         <div className="relative">
           <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
           <h4 className="text-xl font-bold text-indigo-300">Phase 1: Discovery & Foundation (e.g., Sep - Oct)</h4>
-          <p className="text-gray-400 mt-1">Defined **Product Backlog**, created **UI/UX Diagrams** (Figma), set up **AWS IAM** and initial **GitHub repository**. Established core tech stack and database schema.</p>
-          
+          <p className="text-gray-400 mt-1">Defined **Product Backlog**, created **UI/UX Diagrams** (Figma), set up **Entra ID** and initial **GitHub repository**. Established core tech stack and database schema.</p>
+
           <div className="mt-4 grid md:grid-cols-2 gap-4">
             <Card title="Team Planning" className="p-3 bg-gray-700/50">
-              <PlaceholderImage 
-                height="200px" 
-                text="Team Meeting Photo" 
-                imageUrl={WORK_PHOTO_1_URL} 
-                onClick={() => openImageModal(WORK_PHOTO_1_URL)} 
+              <PlaceholderImage
+                height="200px"
+                text="Team Meeting Photo"
+                imageUrl={WORK_PHOTO_1_URL}
+                onClick={() => openImageModal(WORK_PHOTO_1_URL)}
                 className="w-full rounded-lg"
               />
             </Card>
@@ -374,31 +373,31 @@ const WorkflowSection = ({ openImageModal }) => (
           <h4 className="text-xl font-bold text-indigo-300">Phase 2: Core API and Frontend Prototype (Sprints 2-4)</h4>
           <p className="text-gray-400 mt-1">Built **ASP.NET Core API** endpoints for business registration and user search. Deployed the initial **React/Angular frontend** and implemented user authentication (JWT).</p>
         </div>
-        
+
         {/* Milestone 3: Feature Implementation & Testing (e.g., Jan - Feb) */}
         <div className="relative">
           <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
           <h4 className="text-xl font-bold text-indigo-300">Phase 3: Integration & Testing</h4>
-          <p className="text-gray-400 mt-1">Integrated **AWS Lambda** for image processing. Finalized the **CI/CD pipeline** (CodePipeline). Executed **xUnit** (Unit) and **Playwright** (E2E) testing cycles to ensure stability.</p>
-          
+          <p className="text-gray-400 mt-1">Integrated **Azure Functions** for image processing. Finalized the **CI/CD pipeline** (Azure Pipelines). Executed **xUnit** (Unit) and **Playwright** (E2E) testing cycles to ensure stability.</p>
+
           <div className="mt-4 grid md:grid-cols-2 gap-4">
             <Card title="Testing Session" className="p-3 bg-gray-700/50">
-              <PlaceholderImage 
-                height="200px" 
-                text="Debugging / Code Review" 
-                imageUrl={WORK_PHOTO_2_URL} 
-                onClick={() => openImageModal(WORK_PHOTO_2_URL)} 
+              <PlaceholderImage
+                height="200px"
+                text="Debugging / Code Review"
+                imageUrl={WORK_PHOTO_2_URL}
+                onClick={() => openImageModal(WORK_PHOTO_2_URL)}
                 className="w-full rounded-lg"
               />
             </Card>
           </div>
         </div>
-        
+
         {/* Milestone 4: Finalization & Deployment (e.g., March) */}
         <div className="relative">
           <div className="absolute w-4 h-4 bg-indigo-500 rounded-full mt-1 -left-10 border-4 border-gray-900"></div>
           <h4 className="text-xl font-bold text-indigo-300">Phase 4: Final Deployment & Documentation</h4>
-          <p className="text-gray-400 mt-1">Finalized monetization logic and safety features. Deployed the application to **AWS Elastic Beanstalk** and created this **Project Portfolio** submission.</p>
+          <p className="text-gray-400 mt-1">Finalized monetization logic and safety features. Deployed the application to **Azure App Service** and created this **Project Portfolio** submission.</p>
         </div>
 
       </div>
@@ -453,13 +452,13 @@ const componentMap = {
 
 // Function to map team member names to their respective photo URL constants
 const getTeamPhotoUrl = (name) => {
-    switch (name) {
-        case 'Thimira Niranjaya': return THIMIRA_PHOTO_URL;
-        case 'Manjari Bhagya': return MANJARI_PHOTO_URL;
-        case 'Pamal Pahasara': return PAMAL_PHOTO_URL;
-        case 'Uvindu Heshan': return UVINDU_PHOTO_URL;
-        default: return ''; // Fallback to placeholder if name is not found
-    }
+  switch (name) {
+    case 'Thimira Niranjaya': return THIMIRA_PHOTO_URL;
+    case 'Manjari Bhagya': return MANJARI_PHOTO_URL;
+    case 'Pamal Pahasara': return PAMAL_PHOTO_URL;
+    case 'Uvindu Heshan': return UVINDU_PHOTO_URL;
+    default: return ''; // Fallback to placeholder if name is not found
+  }
 };
 
 // === Main App Component ===
@@ -471,31 +470,31 @@ const App = () => {
 
   // Function to open the lightbox
   const openImageModal = (url) => {
-      if (url) {
-          setModalImageUrl(url);
-          setIsModalOpen(true);
-      }
+    if (url) {
+      setModalImageUrl(url);
+      setIsModalOpen(true);
+    }
   };
 
   // Function to close the lightbox
   const closeImageModal = () => {
-      setIsModalOpen(false);
-      setModalImageUrl('');
+    setIsModalOpen(false);
+    setModalImageUrl('');
   };
-  
+
   // Hook to handle closing the modal on ESC key press
   useEffect(() => {
-      const handleKeydown = (e) => {
-          if (e.key === 'Escape' && isModalOpen) {
-              closeImageModal();
-          }
-      };
+    const handleKeydown = (e) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        closeImageModal();
+      }
+    };
 
-      document.addEventListener('keydown', handleKeydown);
-      
-      return () => {
-          document.removeEventListener('keydown', handleKeydown);
-      };
+    document.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
   }, [isModalOpen]);
 
 
@@ -515,12 +514,12 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 antialiased text-gray-100">
-        
+
       {/* 1. RENDER MODAL outside the main content flow */}
-      <ImageModal 
-          isOpen={isModalOpen} 
-          imageUrl={modalImageUrl} 
-          onClose={closeImageModal} 
+      <ImageModal
+        isOpen={isModalOpen}
+        imageUrl={modalImageUrl}
+        onClose={closeImageModal}
       />
 
       {/* Header */}
@@ -529,14 +528,14 @@ const App = () => {
           {/* LOGO AND PROJECT TITLE */}
           <h1 className="text-4xl font-extrabold tracking-tight text-white flex items-center">
             <div className="w-10 h-10 mr-3 flex-shrink-0">
-                <PlaceholderImage 
-                    width="100%"
-                    height="100%"
-                    text="LOGO" 
-                    shape="square" 
-                    className="!border-gray-500/50 text-xs"
-                    imageUrl={LOGO_IMAGE_URL} 
-                />
+              <PlaceholderImage
+                width="100%"
+                height="100%"
+                text="LOGO"
+                shape="square"
+                className="!border-gray-500/50 text-xs"
+                imageUrl={LOGO_IMAGE_URL}
+              />
             </div>
             <span className="text-indigo-400">Near</span>
             <span className="text-indigo-600">U</span>
@@ -566,7 +565,7 @@ const App = () => {
                           : 'text-gray-300 hover:bg-gray-700 hover:text-white'}`
                       }
                     >
-                      <Icon className="w-5 h-5 mr-3"/>
+                      <Icon className="w-5 h-5 mr-3" />
                       {section.title}
                     </button>
                   </li>
@@ -578,37 +577,37 @@ const App = () => {
 
         {/* Dynamic Content Area */}
         <section className="lg:col-span-3 min-h-[60vh]">
-            <h2 className="text-4xl font-extrabold text-white mb-6 border-b-4 border-indigo-500 pb-2">
-                {portfolioSections.find(s => s.id === activeSection)?.title}
-            </h2>
-            <div className="transition-opacity duration-500 ease-in-out">
-                {/* Pass the modal function to the Idea, Cloud, and Workflow sections */}
-                {ActiveComponent && <ActiveComponent openImageModal={openImageModal} />} 
-            </div>
+          <h2 className="text-4xl font-extrabold text-white mb-6 border-b-4 border-indigo-500 pb-2">
+            {portfolioSections.find(s => s.id === activeSection)?.title}
+          </h2>
+          <div className="transition-opacity duration-500 ease-in-out">
+            {/* Pass the modal function to the Idea, Cloud, and Workflow sections */}
+            {ActiveComponent && <ActiveComponent openImageModal={openImageModal} />}
+          </div>
         </section>
       </div>
 
       {/* Team and Supervisor Footer Section */}
       <div className="bg-gray-800 border-t border-indigo-600/50 mt-12 p-8 shadow-inner">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold text-indigo-400 mb-6 flex items-center"><UsersIcon className="w-6 h-6 mr-3"/> Our Development Team</h3>
+          <h3 className="text-3xl font-bold text-indigo-400 mb-6 flex items-center"><UsersIcon className="w-6 h-6 mr-3" /> Our Development Team</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="flex items-center p-4 bg-gray-900 rounded-xl shadow-lg border border-gray-700 transition-all hover:border-indigo-500">
                 {/* Team member photos are static, no onClick or cursor-zoom-in applied */}
-                <div 
-                    className="flex-shrink-0 mr-4 focus:outline-none rounded-full"
+                <div
+                  className="flex-shrink-0 mr-4 focus:outline-none rounded-full"
                 >
-                    <PlaceholderImage 
-                        shape="circle" 
-                        width="60px" 
-                        height="60px" 
-                        objectFitClass="object-contain" 
-                        text={member.name.split(' ')[0][0] + member.name.split(' ')[1][0]} 
-                        className="text-xs"
-                        imageUrl={getTeamPhotoUrl(member.name)} 
-                        // IMPORTANT: The onClick prop is intentionally OMITTED here
-                    />
+                  <PlaceholderImage
+                    shape="circle"
+                    width="60px"
+                    height="60px"
+                    objectFitClass="object-contain"
+                    text={member.name.split(' ')[0][0] + member.name.split(' ')[1][0]}
+                    className="text-xs"
+                    imageUrl={getTeamPhotoUrl(member.name)}
+                  // IMPORTANT: The onClick prop is intentionally OMITTED here
+                  />
                 </div>
                 <div>
                   <p className="font-extrabold text-xl text-white">{member.name}</p>
@@ -632,7 +631,7 @@ const App = () => {
       {/* Global Footer */}
       <footer className="bg-black text-gray-500 p-4">
         <div className="max-w-7xl mx-auto text-center text-sm">
-          <p>&copy; 2025 NearU Capstone Project. Built using ASP.NET Core, React.js, and AWS Free Tier.</p>
+          <p>&copy; 2025 NearU Capstone Project. Built using ASP.NET Core, React.js, and Azure Free Tier.</p>
           <a href="https://github.com/pamal29/NearU.git" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-400 transition-colors mt-1 inline-block">View GitHub Repository & Documentation</a>
         </div>
       </footer>

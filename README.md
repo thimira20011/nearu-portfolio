@@ -1,7 +1,7 @@
 # 🌟 NearU Portfolio: Local Business Marketplace for University Area
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![AWS](https://img.shields.io/badge/AWS-Cloud%20Deployed-orange.svg)]()
+[![Azure](https://img.shields.io/badge/Azure-Cloud%20Deployed-blue.svg)]()
 
 Welcome to the NearU Portfolio! This site showcases the design, development, and impact of NearU—a digital marketplace connecting students and local businesses in university areas.
 
@@ -22,15 +22,15 @@ NearU is a web platform and mobile prototype designed to solve the challenge of 
 
 - **Backend:** ASP.NET Core Web API (C#)
 - **Frontend:** ASP.NET Razor pages, styled with TailwindCSS
-- **Database:** Amazon RDS (SQL Server)
+- **Database:** Azure SQL Database
 - **Authentication:** ASP.NET Identity + JWT
-- **Cloud:** AWS Elastic Beanstalk, S3, Lambda
+- **Cloud:** Azure App Service, Blob Storage, Azure Functions
 - **Design:** Figma for UI/UX
 
 ## 🏗️ Architecture Overview
 
-- **Cloud Hosted:** Scalable AWS infrastructure
-- **CI/CD:** Automated testing and deployment via AWS CodePipeline
+- **Cloud Hosted:** Scalable Azure infrastructure
+- **CI/CD:** Automated testing and deployment via Azure Pipelines
 - **Security:** JWT-based authentication and admin controls
 
 ## 💡 Project Impact
@@ -49,7 +49,7 @@ NearU streamlines access to local services, supports small businesses, and foste
 
 ## 🏆 Achievements
 
-- Successfully deployed on AWS Cloud
+- Successfully deployed on Azure Cloud
 - Implemented robust admin moderation and safety features
 - Designed a scalable, modern architecture
 - Developed a unique bulk order system for students
