@@ -46,6 +46,7 @@ NearU streamlines access to local services, supports small businesses, and foste
 | CI/CD & Cloud Specialist | Pamal Pahasara |
 | Full Stack Developer / Tester | Uvindu Heshan |
 | **Project Supervisor** | **Mr. S. Nishankar** |
+| **Project Mentor** | **Mr. Ravindu Dharmadasa** |
 
 ## 🏆 Achievements
 
