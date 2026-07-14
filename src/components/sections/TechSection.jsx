@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Cpu, Globe, Smartphone } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import TiltCard from '../TiltCard';
 
 const TECH_CATEGORIES = [
   {
@@ -114,7 +115,10 @@ const TechSection = () => {
 
         {/* Tech Tags Grid */}
         <ScrollReveal>
-          <div className="glass-card p-8 sm:p-10 border border-white/5">
+          <TiltCard
+            glowColor={active.id === 'backend' ? 'rgba(224, 86, 56, 0.25)' : active.id === 'frontend' ? 'rgba(15, 76, 129, 0.25)' : 'rgba(245, 158, 11, 0.25)'}
+            className="glass-card p-8 sm:p-10 border border-white/5"
+          >
             <div className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
                 <ActiveIcon className={`w-6 h-6 ${
@@ -145,7 +149,7 @@ const TechSection = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
         </ScrollReveal>
 
         {/* All three columns summary */}
@@ -154,11 +158,14 @@ const TechSection = () => {
             const CatIcon = cat.icon;
             return (
               <ScrollReveal key={cat.id} delay={i + 1}>
-                <div className={`glass-card p-5 text-center border ${
-                  cat.id === 'backend' ? 'border-brand-coral/20 hover:border-brand-coral/40' : 
-                  cat.id === 'frontend' ? 'border-brand-blue/20 hover:border-brand-blue/40' : 
-                  'border-amber-500/20 hover:border-amber-500/40'
-                }`}>
+                <TiltCard
+                  glowColor={cat.id === 'backend' ? 'rgba(224, 86, 56, 0.2)' : cat.id === 'frontend' ? 'rgba(15, 76, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)'}
+                  className={`glass-card p-5 text-center border h-full ${
+                    cat.id === 'backend' ? 'border-brand-coral/20 hover:border-brand-coral/40' : 
+                    cat.id === 'frontend' ? 'border-brand-blue/20 hover:border-brand-blue/40' : 
+                    'border-amber-500/20 hover:border-amber-500/40'
+                  }`}
+                >
                   <div className="flex justify-center mb-2">
                     <CatIcon className={`w-8 h-8 ${
                       cat.id === 'backend' ? 'text-brand-coral-light' : 
@@ -172,7 +179,7 @@ const TechSection = () => {
                     'text-amber-400'
                   }`}>{cat.label}</p>
                   <p className="text-xs text-slate-600 mt-1">{cat.stack.length} technologies</p>
-                </div>
+                </TiltCard>
               </ScrollReveal>
             );
           })}

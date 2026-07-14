@@ -1,6 +1,7 @@
 import React from 'react';
 import { Cpu, Globe, Smartphone, Github, ExternalLink, ArrowRight } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import nearuLogo from '../../assets/logo.svg';
 
 const REPOS = [
   {
@@ -129,9 +130,7 @@ const Footer = () => (
   <footer className="border-t border-white/5 py-10 px-4 bg-[#030508]">
     <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div className="flex items-center gap-2">
-        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-brand-coral to-brand-coral-dark flex items-center justify-center">
-          <span className="text-white font-black text-xs">N</span>
-        </div>
+        <img src={nearuLogo} className="w-7 h-7 object-contain" alt="NearU Logo" />
         <span className="text-white font-bold">Near<span className="gradient-text-coral">U</span></span>
         <span className="text-slate-600 text-xs sm:text-sm ml-2">© 2025 Capstone Project — SUSL Group 11</span>
       </div>

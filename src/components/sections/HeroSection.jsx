@@ -1,15 +1,40 @@
 import React, { useEffect, useRef } from 'react';
 import { Github, BookOpen, GraduationCap, Store, Bike, Shield } from 'lucide-react';
+import TypeWriter from '../TypeWriter';
+import useCountUp from '../../hooks/useCountUp';
 
 const GITHUB_ORG_URL = "https://github.com/Nearu-Project-SUSL";
 const LIVE_API_URL = "https://api.nearusab.me/scalar/v1";
 
 const STATS = [
-  { value: '4', label: 'User Roles', suffix: '' },
-  { value: '10', label: 'Core Modules', suffix: '+' },
-  { value: '3', label: 'Platforms', suffix: '' },
-  { value: '100', label: 'API Endpoints', suffix: '+' },
+  { value: 4, label: 'User Roles', suffix: '' },
+  { value: 10, label: 'Core Modules', suffix: '+' },
+  { value: 3, label: 'Platforms', suffix: '' },
+  { value: 100, label: 'API Endpoints', suffix: '+' },
 ];
+
+const TYPEWRITER_PHRASES = [
+  'Connecting Students, Businesses & Riders',
+  'Powered by .NET, React & Azure',
+  'Hyper-Local. Real-Time. Secure.',
+];
+
+/** Animated stat card with count-up effect */
+const StatCard = ({ value, label, suffix, delay }) => {
+  const { ref, count } = useCountUp(value, 1500);
+  return (
+    <div
+      ref={ref}
+      className="glass-card shimmer-on-hover p-4 text-center hover:scale-105 transition-all duration-300 hover:border-brand-coral/30 load-scale-in"
+      style={{ animationDelay: `${1.0 + delay * 0.12}s` }}
+    >
+      <div className="text-2xl sm:text-3xl font-black gradient-text-coral">
+        {count}<span className="text-brand-coral-light">{suffix}</span>
+      </div>
+      <div className="text-[10px] sm:text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">{label}</div>
+    </div>
+  );
+};
 
 const HeroSection = () => {
   const canvasRef = useRef(null);
@@ -87,44 +112,76 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center hero-gradient overflow-hidden pt-20 pb-16">
       {/* Particle canvas */}
-      <canvas ref={canvasRef} id="particle-canvas" />
+      <canvas ref={canvasRef} id="particle-canvas" className="load-fade load-delay-7" />
 
-      {/* Glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-coral/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-brand-blue/8 rounded-full blur-3xl pointer-events-none" />
+      {/* Glow orbs — parallax-ready */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-coral/10 rounded-full blur-3xl pointer-events-none load-fade load-delay-1 parallax-slow" />
+      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-brand-blue/8 rounded-full blur-3xl pointer-events-none load-fade load-delay-2 parallax-slow" />
+
+      {/* Ambient floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="ambient-particle"
+            style={{
+              '--size': `${2 + Math.random() * 3}px`,
+              '--particle-color': i % 3 === 0 ? 'rgba(224, 86, 56, 0.35)' : 'rgba(59, 130, 246, 0.3)',
+              '--drift-x': `${(Math.random() - 0.5) * 120}px`,
+              '--drift-y': `${-40 - Math.random() * 80}px`,
+              '--duration': `${6 + Math.random() * 6}s`,
+              '--delay': `${Math.random() * 5}s`,
+              left: `${10 + Math.random() * 80}%`,
+              top: `${10 + Math.random() * 80}%`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Text & Stats */}
           <div className="lg:col-span-7 text-center lg:text-left">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm">
+            {/* Badge — orchestrated entry */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm load-slide-down load-delay-2">
               <span className="w-2 h-2 rounded-full bg-brand-coral ping-slow inline-block animate-pulse" />
               Sabaragamuwa University of Sri Lanka — Capstone 2025
             </div>
 
-            {/* Main Title */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-none text-white">
+            {/* Main Title — blur-in for dramatic reveal */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-none text-white load-blur-in load-delay-3">
               Near<span className="gradient-text-coral text-glow-coral">U</span>
             </h1>
 
             {/* Tagline */}
-            <p className="text-xl sm:text-2xl font-bold text-slate-200 mb-4 leading-snug">
+            <p className="text-xl sm:text-2xl font-bold text-slate-200 mb-4 leading-snug load-slide-up load-delay-4">
               Hyper-Local Campus Service &amp; Gig Marketplace
             </p>
-            <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+
+            {/* TypeWriter cycling phrases */}
+            <div className="h-7 mb-4 load-fade load-delay-5">
+              <TypeWriter
+                phrases={TYPEWRITER_PHRASES}
+                className="text-slate-400 text-sm sm:text-base font-medium"
+                typingSpeed={55}
+                deletingSpeed={30}
+                pauseDuration={2200}
+              />
+            </div>
+
+            <p className="text-slate-500 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed load-fade load-delay-5">
               An enterprise-grade cross-platform solution linking university students, local businesses, and student riders in one self-sustaining, secure campus ecosystem.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+            {/* CTA Buttons — spring scale-in */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 load-scale-in load-delay-6">
               <a
                 href={GITHUB_ORG_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 id="hero-github-btn"
-                className="btn-primary flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl text-white font-bold text-sm w-full sm:w-auto"
+                className="btn-primary glow-pulse-coral flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl text-white font-bold text-sm w-full sm:w-auto"
               >
                 <Github className="w-4 h-4" />
                 View on GitHub
@@ -141,19 +198,10 @@ const HeroSection = () => {
               </a>
             </div>
 
-            {/* Stats */}
+            {/* Stats — animated count-up */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto lg:mx-0">
               {STATS.map((stat, i) => (
-                <div
-                  key={i}
-                  className="glass-card p-4 text-center hover:scale-105 transition-all duration-300 hover:border-brand-coral/30"
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                >
-                  <div className="text-2xl sm:text-3xl font-black gradient-text-coral">
-                    {stat.value}<span className="text-brand-coral-light">{stat.suffix}</span>
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">{stat.label}</div>
-                </div>
+                <StatCard key={i} value={stat.value} label={stat.label} suffix={stat.suffix} delay={i} />
               ))}
             </div>
           </div>
