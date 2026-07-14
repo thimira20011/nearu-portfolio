@@ -43,8 +43,10 @@ const TiltCard = ({ children, className = '', glowColor = 'rgba(224, 86, 56, 0.4
     }
   }, []);
 
+  const hasFullHeight = className.includes('h-full');
+
   return (
-    <div className="relative group" style={{ transformStyle: 'preserve-3d' }}>
+    <div className={`relative group ${hasFullHeight ? 'h-full' : ''}`} style={{ transformStyle: 'preserve-3d' }}>
       {/* Animated border glow layer */}
       <div
         ref={borderRef}
