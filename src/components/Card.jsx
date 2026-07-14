@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Card = ({ title, icon: Icon, className, children }) => (
-    <div className={`p-6 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700/50 transition-all duration-300 transform hover:scale-[1.01] ${className}`}>
+    <div className={`p-6 bg-[#0b0e17] rounded-2xl shadow-2xl border border-brand-coral/15 transition-all duration-300 transform hover:scale-[1.01] ${className}`}>
         {title && (
-            <h3 className="text-2xl font-bold text-indigo-400 mb-4 flex items-center border-b border-gray-700 pb-2">
-                {Icon && <Icon className="w-6 h-6 mr-3 text-indigo-500" />}
+            <h3 className="text-2xl font-bold text-brand-coral-light mb-4 flex items-center border-b border-white/5 pb-2">
+                {Icon && <Icon className="w-6 h-6 mr-3 text-brand-coral" />}
                 {title}
             </h3>
         )}

@@ -16,7 +16,7 @@ const ImageModal = ({ imageUrl, isOpen, onClose }) => {
         >
             {/* Close Button */}
             <button
-                className="absolute top-4 right-4 text-white hover:text-indigo-400 transition-colors z-[51] p-2 rounded-full bg-gray-800/50"
+                className="absolute top-4 right-4 text-white hover:text-brand-coral-light transition-colors z-[51] p-2 rounded-full bg-gray-800/50"
                 onClick={onClose}
                 aria-label="Close image modal"
             >
@@ -31,7 +31,7 @@ const ImageModal = ({ imageUrl, isOpen, onClose }) => {
                     src={imageUrl}
                     alt="Full View"
                     // Tailwind classes for responsive image display
-                    className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-indigo-400/50"
+                    className="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border border-brand-coral/50"
                     loading="lazy"
                     onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
                 />
