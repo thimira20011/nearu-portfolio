@@ -21,7 +21,7 @@ NearU is a web platform and mobile prototype designed to solve the challenge of 
 ## 🛠️ Technology Highlights
 
 - **Backend:** ASP.NET Core Web API (C#)
-- **Frontend:**React with TypeScript, styled with TailwindCSS
+- **Frontend:** React with TypeScript, styled with TailwindCSS
 - **Database:** Azure SQL Database
 - **Authentication:** ASP.NET Identity + JWT
 - **Cloud:** Azure App Service, Blob Storage, Azure Functions
