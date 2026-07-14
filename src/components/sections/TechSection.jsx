@@ -138,7 +138,6 @@ const TechSection = () => {
                 <div
                   key={i}
                   className={`tech-badge group relative px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-semibold cursor-default shadow-md ${active.tagClass} ${active.hoverClass} transition-all duration-200`}
-                  style={{ transitionDelay: `${i * 20}ms` }}
                 >
                   {tech.name}
                   {/* Tooltip */}
