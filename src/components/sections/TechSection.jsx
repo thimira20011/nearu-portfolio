@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { Cpu, Globe, Smartphone } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
 
 const TECH_CATEGORIES = [
   {
     id: 'backend',
     label: 'Backend',
-    icon: '⚙️',
-    color: 'violet',
-    tagClass: 'bg-violet-500/10 border-violet-500/30 text-violet-300',
-    hoverClass: 'hover:bg-violet-500/20 hover:border-violet-400/50 hover:shadow-violet-500/20',
+    icon: Cpu,
+    color: 'coral',
+    tagClass: 'bg-brand-coral/10 border-brand-coral/30 text-brand-coral-light',
+    hoverClass: 'hover:bg-brand-coral/20 hover:border-brand-coral-light/50 hover:shadow-brand-coral/10',
     stack: [
       { name: '.NET 10 / ASP.NET Core', desc: 'Web API framework (C#)' },
       { name: 'PostgreSQL', desc: 'Primary relational database' },
@@ -27,10 +28,10 @@ const TECH_CATEGORIES = [
   {
     id: 'frontend',
     label: 'Frontend Web',
-    icon: '🌐',
-    color: 'cyan',
-    tagClass: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-300',
-    hoverClass: 'hover:bg-cyan-500/20 hover:border-cyan-400/50 hover:shadow-cyan-500/20',
+    icon: Globe,
+    color: 'blue',
+    tagClass: 'bg-brand-blue/10 border-brand-blue/30 text-brand-blue-light',
+    hoverClass: 'hover:bg-brand-blue/20 hover:border-brand-blue-light/50 hover:shadow-brand-blue/10',
     stack: [
       { name: 'React 18', desc: 'UI component framework' },
       { name: 'TypeScript', desc: 'Type-safe development' },
@@ -46,10 +47,10 @@ const TECH_CATEGORIES = [
   {
     id: 'mobile',
     label: 'Mobile App',
-    icon: '📱',
-    color: 'emerald',
-    tagClass: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300',
-    hoverClass: 'hover:bg-emerald-500/20 hover:border-emerald-400/50 hover:shadow-emerald-500/20',
+    icon: Smartphone,
+    color: 'amber',
+    tagClass: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+    hoverClass: 'hover:bg-amber-500/20 hover:border-amber-400/50 hover:shadow-amber-500/10',
     stack: [
       { name: 'Expo SDK 54', desc: 'React Native managed workflow' },
       { name: 'React Native 0.81', desc: 'Cross-platform mobile' },
@@ -68,19 +69,20 @@ const TECH_CATEGORIES = [
 const TechSection = () => {
   const [activeCat, setActiveCat] = useState('backend');
   const active = TECH_CATEGORIES.find(c => c.id === activeCat);
+  const ActiveIcon = active.icon;
 
   return (
     <section id="tech" className="section-border-top py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/25 text-violet-400 text-sm font-semibold mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
               Technology Stack
             </span>
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Built with <span className="gradient-text">Modern Tech</span>
+              Built with <span className="gradient-text-coral text-glow-coral">Modern Tech</span>
             </h2>
-            <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
               A carefully chosen stack across three platforms — built for performance, security, and scale.
             </p>
           </div>
@@ -89,32 +91,41 @@ const TechSection = () => {
         {/* Platform Tabs */}
         <ScrollReveal delay={1}>
           <div className="flex justify-center gap-3 mb-10 flex-wrap">
-            {TECH_CATEGORIES.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCat(cat.id)}
-                id={`tech-tab-${cat.id}`}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 border ${
-                  activeCat === cat.id
-                    ? `${cat.tagClass} shadow-lg`
-                    : 'border-white/10 text-slate-500 hover:text-white hover:border-white/20 hover:bg-white/5'
-                }`}
-              >
-                <span className="text-xl">{cat.icon}</span>
-                {cat.label}
-              </button>
-            ))}
+            {TECH_CATEGORIES.map(cat => {
+              const TabIcon = cat.icon;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCat(cat.id)}
+                  id={`tech-tab-${cat.id}`}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 border ${
+                    activeCat === cat.id
+                      ? `${cat.tagClass} shadow-lg shadow-brand-coral/5`
+                      : 'border-white/10 text-slate-500 hover:text-white hover:border-white/20 hover:bg-white/5'
+                  }`}
+                >
+                  <TabIcon className="w-4 h-4" />
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
         </ScrollReveal>
 
         {/* Tech Tags Grid */}
         <ScrollReveal>
-          <div className="glass-card p-8 sm:p-10">
+          <div className="glass-card p-8 sm:p-10 border border-white/5">
             <div className="flex items-center gap-3 mb-8">
-              <span className="text-4xl">{active.icon}</span>
+              <div className="w-12 h-12 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
+                <ActiveIcon className={`w-6 h-6 ${
+                  active.id === 'backend' ? 'text-brand-coral-light' :
+                  active.id === 'frontend' ? 'text-brand-blue-light' :
+                  'text-amber-400'
+                }`} />
+              </div>
               <div>
                 <h3 className="text-xl font-black text-white">{active.label} Stack</h3>
-                <p className="text-slate-500 text-sm">{active.stack.length} technologies</p>
+                <p className="text-slate-500 text-xs">{active.stack.length} technologies</p>
               </div>
             </div>
 
@@ -122,12 +133,12 @@ const TechSection = () => {
               {active.stack.map((tech, i) => (
                 <div
                   key={i}
-                  className={`tech-badge group relative px-4 py-2.5 rounded-xl border text-sm font-semibold cursor-default shadow-md ${active.tagClass} ${active.hoverClass} transition-all duration-200`}
-                  style={{ transitionDelay: `${i * 30}ms` }}
+                  className={`tech-badge group relative px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-semibold cursor-default shadow-md ${active.tagClass} ${active.hoverClass} transition-all duration-200`}
+                  style={{ transitionDelay: `${i * 20}ms` }}
                 >
                   {tech.name}
                   {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#0d0d1e] border border-white/10 rounded-lg text-xs text-slate-400 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 shadow-xl">
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#0b0e17] border border-white/10 rounded-lg text-[10px] sm:text-xs text-slate-400 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 shadow-xl">
                     {tech.desc}
                     <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/10" />
                   </div>
@@ -139,15 +150,32 @@ const TechSection = () => {
 
         {/* All three columns summary */}
         <div className="grid sm:grid-cols-3 gap-4 mt-8">
-          {TECH_CATEGORIES.map((cat, i) => (
-            <ScrollReveal key={cat.id} delay={i + 1}>
-              <div className={`glass-card p-5 text-center border ${cat.tagClass.includes('violet') ? 'border-violet-500/20' : cat.tagClass.includes('cyan') ? 'border-cyan-500/20' : 'border-emerald-500/20'}`}>
-                <div className="text-3xl mb-2">{cat.icon}</div>
-                <p className={`text-sm font-bold ${cat.tagClass.split(' ')[2]}`}>{cat.label}</p>
-                <p className="text-xs text-slate-600 mt-1">{cat.stack.length} technologies</p>
-              </div>
-            </ScrollReveal>
-          ))}
+          {TECH_CATEGORIES.map((cat, i) => {
+            const CatIcon = cat.icon;
+            return (
+              <ScrollReveal key={cat.id} delay={i + 1}>
+                <div className={`glass-card p-5 text-center border ${
+                  cat.id === 'backend' ? 'border-brand-coral/20 hover:border-brand-coral/40' : 
+                  cat.id === 'frontend' ? 'border-brand-blue/20 hover:border-brand-blue/40' : 
+                  'border-amber-500/20 hover:border-amber-500/40'
+                }`}>
+                  <div className="flex justify-center mb-2">
+                    <CatIcon className={`w-8 h-8 ${
+                      cat.id === 'backend' ? 'text-brand-coral-light' : 
+                      cat.id === 'frontend' ? 'text-brand-blue-light' : 
+                      'text-amber-400'
+                    }`} />
+                  </div>
+                  <p className={`text-sm font-bold ${
+                    cat.id === 'backend' ? 'text-brand-coral-light' : 
+                    cat.id === 'frontend' ? 'text-brand-blue-light' : 
+                    'text-amber-400'
+                  }`}>{cat.label}</p>
+                  <p className="text-xs text-slate-600 mt-1">{cat.stack.length} technologies</p>
+                </div>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

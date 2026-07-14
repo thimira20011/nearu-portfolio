@@ -1,9 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-
-// ============================================================
-// HERO IMAGE PLACEHOLDERS — Replace URLs below with real images
-// ============================================================
-// const IMG_HERO_PRODUCT = "YOUR_HERO_SCREENSHOT_URL_HERE";
+import { Github, BookOpen, GraduationCap, Store, Bike, Shield } from 'lucide-react';
 
 const GITHUB_ORG_URL = "https://github.com/Nearu-Project-SUSL";
 const LIVE_API_URL = "https://api.nearusab.me/scalar/v1";
@@ -34,15 +30,15 @@ const HeroSection = () => {
     window.addEventListener('resize', resize);
 
     // Create particles
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 70; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.5 + 0.3,
-        dx: (Math.random() - 0.5) * 0.3,
-        dy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.5 + 0.1,
-        color: Math.random() > 0.5 ? '168,85,247' : '6,182,212',
+        r: Math.random() * 1.6 + 0.4,
+        dx: (Math.random() - 0.5) * 0.25,
+        dy: (Math.random() - 0.5) * 0.25,
+        alpha: Math.random() * 0.4 + 0.1,
+        color: Math.random() > 0.5 ? '224,86,56' : '59,130,246', // brand-coral vs brand-blue
       });
     }
 
@@ -67,11 +63,11 @@ const HeroSection = () => {
       particles.forEach((p1, i) => {
         particles.slice(i + 1).forEach(p2 => {
           const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-          if (dist < 100) {
+          if (dist < 110) {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(124,58,237,${0.08 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(224,86,56,${0.06 * (1 - dist / 110)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -89,84 +85,208 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center hero-gradient overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center hero-gradient overflow-hidden pt-20 pb-16">
       {/* Particle canvas */}
       <canvas ref={canvasRef} id="particle-canvas" />
 
       {/* Glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-cyan-500/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-coral/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-brand-blue/8 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/25 text-violet-300 text-sm font-medium mb-8 backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-violet-400 ping-slow inline-block" />
-          Sabaragamuwa University of Sri Lanka — Capstone 2025
-        </div>
-
-        {/* Main Title */}
-        <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight mb-6 leading-none">
-          <span className="text-white">Near</span>
-          <span className="gradient-text text-glow-violet">U</span>
-        </h1>
-
-        {/* Tagline */}
-        <p className="text-xl sm:text-2xl lg:text-3xl text-slate-300 font-medium mb-4 leading-relaxed">
-          Hyper-Local Campus Service &amp; Gig Marketplace
-        </p>
-        <p className="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto mb-10">
-          Connecting university students with local businesses, riders, and services — seamlessly, securely, and at scale.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <a
-            href={GITHUB_ORG_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            id="hero-github-btn"
-            className="btn-primary flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-base"
-          >
-            <svg className="w-5 h-5 fill-current flex-shrink-0" viewBox="0 0 24 24">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            View on GitHub
-          </a>
-          <a
-            href={LIVE_API_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            id="hero-api-btn"
-            className="btn-secondary flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-base"
-          >
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
-            Live API Docs
-          </a>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
-          {STATS.map((stat, i) => (
-            <div
-              key={i}
-              className="glass-card p-4 text-center"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <div className="text-3xl font-black gradient-text">
-                {stat.value}<span className="text-violet-400">{stat.suffix}</span>
-              </div>
-              <div className="text-xs text-slate-500 mt-1 font-medium">{stat.label}</div>
+      {/* Content Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Text & Stats */}
+          <div className="lg:col-span-7 text-center lg:text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-xs sm:text-sm font-semibold mb-6 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-brand-coral ping-slow inline-block animate-pulse" />
+              Sabaragamuwa University of Sri Lanka — Capstone 2025
             </div>
-          ))}
+
+            {/* Main Title */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-none text-white">
+              Near<span className="gradient-text-coral text-glow-coral">U</span>
+            </h1>
+
+            {/* Tagline */}
+            <p className="text-xl sm:text-2xl font-bold text-slate-200 mb-4 leading-snug">
+              Hyper-Local Campus Service &amp; Gig Marketplace
+            </p>
+            <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+              An enterprise-grade cross-platform solution linking university students, local businesses, and student riders in one self-sustaining, secure campus ecosystem.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+              <a
+                href={GITHUB_ORG_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="hero-github-btn"
+                className="btn-primary flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl text-white font-bold text-sm w-full sm:w-auto"
+              >
+                <Github className="w-4 h-4" />
+                View on GitHub
+              </a>
+              <a
+                href={LIVE_API_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="hero-api-btn"
+                className="btn-secondary flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl text-white font-bold text-sm w-full sm:w-auto"
+              >
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                Interactive API Docs
+              </a>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto lg:mx-0">
+              {STATS.map((stat, i) => (
+                <div
+                  key={i}
+                  className="glass-card p-4 text-center hover:scale-105 transition-all duration-300 hover:border-brand-coral/30"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  <div className="text-2xl sm:text-3xl font-black gradient-text-coral">
+                    {stat.value}<span className="text-brand-coral-light">{stat.suffix}</span>
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-slate-500 mt-1 font-semibold uppercase tracking-wider">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Premium 3D SVG Campus Grid Graphic */}
+          <div className="lg:col-span-5 flex justify-center items-center">
+            <div className="relative w-full max-w-[420px] aspect-square flex justify-center items-center float-anim">
+              {/* Radial backdrop light */}
+              <div className="absolute w-80 h-80 rounded-full bg-brand-coral/5 blur-3xl pointer-events-none" />
+
+              {/* 3D Map SVG */}
+              <svg viewBox="0 0 500 500" className="w-full h-full drop-shadow-[0_20px_50px_rgba(224,86,56,0.15)]">
+                <defs>
+                  {/* Grid pattern */}
+                  <pattern id="isometric-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(224, 86, 56, 0.08)" strokeWidth="1"/>
+                  </pattern>
+                  {/* Gradients */}
+                  <linearGradient id="grid-plane-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#0c1120" stopOpacity="0.85" />
+                    <stop offset="100%" stopColor="#05070c" stopOpacity="0.95" />
+                  </linearGradient>
+                  <linearGradient id="coral-glow" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#ff785a" />
+                    <stop offset="100%" stopColor="#e05638" />
+                  </linearGradient>
+                  <linearGradient id="blue-glow" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#60a5fa" />
+                    <stop offset="100%" stopColor="#0f4c81" />
+                  </linearGradient>
+                  <linearGradient id="amber-glow" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#fbbf24" />
+                    <stop offset="100%" stopColor="#d97706" />
+                  </linearGradient>
+                </defs>
+
+                {/* Perspective transformed group */}
+                <g transform="translate(0, 50)">
+                  {/* Base grid plate (Isometric projection) */}
+                  <polygon 
+                    points="250,50 450,150 450,310 250,410 50,310 50,150" 
+                    fill="url(#grid-plane-grad)" 
+                    stroke="rgba(224, 86, 56, 0.2)" 
+                    strokeWidth="2"
+                  />
+
+                  {/* Internal Grid Lines */}
+                  <polygon 
+                    points="250,70 430,160 430,290 250,380 70,290 70,160" 
+                    fill="url(#isometric-grid)" 
+                    opacity="0.6"
+                  />
+
+                  {/* Connected road tracks */}
+                  <path 
+                    d="M 120,185 L 250,250 M 250,250 L 380,185 M 250,250 L 250,370" 
+                    stroke="rgba(15, 76, 129, 0.4)" 
+                    strokeWidth="4" 
+                    strokeLinecap="round" 
+                    strokeDasharray="4 8"
+                  />
+
+                  {/* Center Node Hub */}
+                  <circle cx="250" cy="250" r="16" fill="#0f4c81" opacity="0.3" />
+                  <circle cx="250" cy="250" r="8" fill="#ff785a" className="animate-pulse" />
+
+                  {/* 1. Student Node (Left) */}
+                  <g className="cursor-pointer group" transform="translate(120, 185)">
+                    {/* Pulsing ring */}
+                    <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#fbbf24" strokeWidth="1" opacity="0.5" className="animate-ping" style={{ animationDuration: '3s' }} />
+                    {/* Shadow ellipse */}
+                    <ellipse cx="0" cy="5" rx="14" ry="7" fill="black" opacity="0.4" />
+                    {/* Floating Pin */}
+                    <g transform="translate(0, -32)" className="hover:-translate-y-2 transition-transform duration-300">
+                      <path d="M-14,0 C-14,-22 14,-22 14,0 C14,14 0,28 0,28 C0,28 -14,14 -14,0 Z" fill="url(#amber-glow)" stroke="#ffffff" strokeWidth="1.5" />
+                      <circle cx="0" cy="-2" r="10" fill="#030508" />
+                      {/* Icon representation (GraduationCap) */}
+                      <g transform="translate(-6, -8) scale(0.5)">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" stroke="#fbbf24" strokeWidth="2.5" fill="none" />
+                        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" stroke="#fbbf24" strokeWidth="2.5" fill="none" />
+                      </g>
+                    </g>
+                  </g>
+
+                  {/* 2. Business Node (Right) */}
+                  <g className="cursor-pointer group" transform="translate(380, 185)">
+                    {/* Pulsing ring */}
+                    <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#e05638" strokeWidth="1" opacity="0.5" className="animate-ping" style={{ animationDuration: '3.5s' }} />
+                    {/* Shadow ellipse */}
+                    <ellipse cx="0" cy="5" rx="14" ry="7" fill="black" opacity="0.4" />
+                    {/* Floating Pin */}
+                    <g transform="translate(0, -32)" className="hover:-translate-y-2 transition-transform duration-300">
+                      <path d="M-14,0 C-14,-22 14,-22 14,0 C14,14 0,28 0,28 C0,28 -14,14 -14,0 Z" fill="url(#coral-glow)" stroke="#ffffff" strokeWidth="1.5" />
+                      <circle cx="0" cy="-2" r="10" fill="#030508" />
+                      {/* Icon representation (Store) */}
+                      <g transform="translate(-6, -8) scale(0.5)">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#ff785a" strokeWidth="2.5" fill="none" />
+                        <path d="M9 22V12h6v10" stroke="#ff785a" strokeWidth="2.5" fill="none" />
+                      </g>
+                    </g>
+                  </g>
+
+                  {/* 3. Rider Node (Bottom Center) */}
+                  <g className="cursor-pointer group" transform="translate(250, 370)">
+                    {/* Pulsing ring */}
+                    <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#3b82f6" strokeWidth="1" opacity="0.5" className="animate-ping" style={{ animationDuration: '4s' }} />
+                    {/* Shadow ellipse */}
+                    <ellipse cx="0" cy="5" rx="14" ry="7" fill="black" opacity="0.4" />
+                    {/* Floating Pin */}
+                    <g transform="translate(0, -32)" className="hover:-translate-y-2 transition-transform duration-300">
+                      <path d="M-14,0 C-14,-22 14,-22 14,0 C14,14 0,28 0,28 C0,28 -14,14 -14,0 Z" fill="url(#blue-glow)" stroke="#ffffff" strokeWidth="1.5" />
+                      <circle cx="0" cy="-2" r="10" fill="#030508" />
+                      {/* Icon representation (Bike/Moto) */}
+                      <g transform="translate(-6, -8) scale(0.5)">
+                        <circle cx="5.5" cy="17.5" r="3.5" stroke="#60a5fa" strokeWidth="2.5" fill="none" />
+                        <circle cx="18.5" cy="17.5" r="3.5" stroke="#60a5fa" strokeWidth="2.5" fill="none" />
+                        <path d="M15 17.5L12 9H6.5" stroke="#60a5fa" strokeWidth="2.5" fill="none" />
+                        <path d="M12 9l3-4h3.5" stroke="#60a5fa" strokeWidth="2.5" fill="none" />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 scroll-bounce">
-        <span className="text-xs font-medium tracking-widest uppercase">Scroll</span>
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-700 scroll-bounce pointer-events-none">
+        <span className="text-[10px] font-bold tracking-widest uppercase text-slate-500">Scroll</span>
+        <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
         </svg>
       </div>
     </section>

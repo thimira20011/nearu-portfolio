@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { GraduationCap, Bike, Store, Shield, Lock, Check } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
 
 const ROLES = [
   {
     id: 'student',
-    icon: '🎓',
+    icon: GraduationCap,
     title: 'Students & Guests',
-    color: 'violet',
-    borderColor: 'border-violet-500/40',
-    glowColor: 'hover:shadow-violet-500/20',
-    badgeClass: 'bg-violet-500/10 text-violet-300',
+    color: 'coral',
+    borderColor: 'border-brand-coral/40',
+    glowColor: 'hover:shadow-brand-coral/10 hover:border-brand-coral/60',
+    badgeClass: 'bg-brand-coral/15 text-brand-coral-light',
     features: [
       'Browse & discover local services by category',
       'Order food, laundry, printing & custom errands',
@@ -22,12 +23,12 @@ const ROLES = [
   },
   {
     id: 'rider',
-    icon: '🏍️',
+    icon: Bike,
     title: 'Student Riders',
-    color: 'cyan',
-    borderColor: 'border-cyan-500/40',
-    glowColor: 'hover:shadow-cyan-500/20',
-    badgeClass: 'bg-cyan-500/10 text-cyan-300',
+    color: 'blue',
+    borderColor: 'border-brand-blue/40',
+    glowColor: 'hover:shadow-brand-blue/10 hover:border-brand-blue/60',
+    badgeClass: 'bg-brand-blue/15 text-brand-blue-light',
     features: [
       'Toggle active/offline delivery status',
       'Receive & accept incoming delivery requests',
@@ -39,12 +40,12 @@ const ROLES = [
   },
   {
     id: 'business',
-    icon: '🏪',
+    icon: Store,
     title: 'Campus Businesses',
-    color: 'emerald',
-    borderColor: 'border-emerald-500/40',
-    glowColor: 'hover:shadow-emerald-500/20',
-    badgeClass: 'bg-emerald-500/10 text-emerald-300',
+    color: 'amber',
+    borderColor: 'border-amber-500/40',
+    glowColor: 'hover:shadow-amber-500/10 hover:border-amber-500/60',
+    badgeClass: 'bg-amber-500/15 text-amber-400',
     features: [
       'Register & manage professional business profiles',
       'Upload photos, menus, pricing & service details',
@@ -57,12 +58,12 @@ const ROLES = [
   },
   {
     id: 'admin',
-    icon: '🛡️',
+    icon: Shield,
     title: 'Platform Admin',
-    color: 'amber',
-    borderColor: 'border-amber-500/40',
-    glowColor: 'hover:shadow-amber-500/20',
-    badgeClass: 'bg-amber-500/10 text-amber-300',
+    color: 'slate',
+    borderColor: 'border-slate-500/40',
+    glowColor: 'hover:shadow-slate-500/10 hover:border-slate-500/60',
+    badgeClass: 'bg-slate-500/15 text-slate-300',
     features: [
       'Approve / reject business registrations',
       'Moderate reported users & reviews',
@@ -77,19 +78,20 @@ const ROLES = [
 const FeaturesSection = () => {
   const [activeRole, setActiveRole] = useState('student');
   const active = ROLES.find(r => r.id === activeRole);
+  const ActiveIcon = active.icon;
 
   return (
     <section id="features" className="section-border-top py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/25 text-violet-400 text-sm font-semibold mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
               Core Features
             </span>
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Built for <span className="gradient-text">Every Role</span>
+              Built for <span className="gradient-text-coral text-glow-coral">Every Role</span>
             </h2>
-            <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
               NearU adapts dynamically to four distinct roles, each with a tailored interface and workflow.
             </p>
           </div>
@@ -98,29 +100,34 @@ const FeaturesSection = () => {
         {/* Role Selector Tabs */}
         <ScrollReveal delay={1}>
           <div className="flex flex-wrap justify-center gap-3 mb-10">
-            {ROLES.map(role => (
-              <button
-                key={role.id}
-                onClick={() => setActiveRole(role.id)}
-                id={`role-tab-${role.id}`}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 border ${
-                  activeRole === role.id
-                    ? `${role.borderColor} ${role.badgeClass} shadow-lg shadow-violet-500/10`
-                    : 'border-white/10 text-slate-500 hover:text-white hover:border-white/20 hover:bg-white/5'
-                }`}
-              >
-                <span className="text-lg">{role.icon}</span>
-                {role.title}
-              </button>
-            ))}
+            {ROLES.map(role => {
+              const RoleIcon = role.icon;
+              return (
+                <button
+                  key={role.id}
+                  onClick={() => setActiveRole(role.id)}
+                  id={`role-tab-${role.id}`}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 border ${
+                    activeRole === role.id
+                      ? `${role.borderColor} ${role.badgeClass} shadow-lg shadow-brand-coral/5`
+                      : 'border-white/10 text-slate-500 hover:text-white hover:border-white/20 hover:bg-white/5'
+                  }`}
+                >
+                  <RoleIcon className="w-4 h-4" />
+                  {role.title}
+                </button>
+              );
+            })}
           </div>
         </ScrollReveal>
 
         {/* Active Role Card */}
         <ScrollReveal>
-          <div className={`glass-card p-8 sm:p-10 border ${active.borderColor} hover:shadow-2xl ${active.glowColor} transition-all duration-300`}>
+          <div className={`glass-card p-8 sm:p-10 border ${active.borderColor} ${active.glowColor} transition-all duration-300`}>
             <div className="flex items-start gap-4 mb-8">
-              <div className="text-5xl leading-none">{active.icon}</div>
+              <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
+                <ActiveIcon className={`w-8 h-8 ${active.id === 'student' ? 'text-brand-coral-light' : active.id === 'rider' ? 'text-brand-blue-light' : active.id === 'business' ? 'text-amber-400' : 'text-slate-300'}`} />
+              </div>
               <div>
                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${active.badgeClass} mb-2`}>
                   {active.title}
@@ -135,12 +142,10 @@ const FeaturesSection = () => {
               {active.features.map((feat, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition-colors duration-200"
-                  style={{ animationDelay: `${i * 80}ms` }}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors duration-200"
+                  style={{ animationDelay: `${i * 60}ms` }}
                 >
-                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                  </svg>
+                  <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${active.id === 'student' ? 'text-brand-coral-light' : active.id === 'rider' ? 'text-brand-blue-light' : active.id === 'business' ? 'text-amber-400' : 'text-slate-300'}`} />
                   <span className="text-slate-300 text-sm">{feat}</span>
                 </div>
               ))}
@@ -150,15 +155,17 @@ const FeaturesSection = () => {
 
         {/* Safety & Moderation banner */}
         <ScrollReveal delay={2}>
-          <div className="mt-8 glass-card p-6 border border-rose-500/20 bg-rose-500/[0.03]">
+          <div className="mt-8 glass-card p-6 border border-brand-coral/20 bg-brand-coral/[0.01]">
             <div className="flex items-start gap-4">
-              <span className="text-3xl flex-shrink-0">🔒</span>
+              <div className="w-12 h-12 rounded-xl bg-brand-coral/10 flex items-center justify-center flex-shrink-0 border border-brand-coral/20">
+                <Lock className="w-5 h-5 text-brand-coral-light" />
+              </div>
               <div>
-                <h4 className="font-bold text-rose-300 mb-1">Platform Safety & Moderation</h4>
+                <h4 className="font-bold text-brand-coral-light mb-1">Platform Safety & Moderation</h4>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  All business registrations require <strong className="text-white">Admin Approval</strong> before going live.
+                  All business registrations require <strong className="text-white font-semibold">Admin Approval</strong> before going live.
                   Businesses with consistently poor reviews can be flagged and removed.
-                  A mandatory <strong className="text-white">Terms & Conditions</strong> agreement and a visible disclaimer ensure full user transparency:
+                  A mandatory <strong className="text-white font-semibold">Terms & Conditions</strong> agreement and a visible disclaimer ensure full user transparency:
                   <em className="text-slate-500"> "This platform lists contacts only — NearU does not take responsibility for external service quality or agreements."</em>
                 </p>
               </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Laptop, Network, Cpu, FolderGit, Database, Layers, Radio, Container, Key } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
 
 const LAYERS = [
@@ -6,168 +7,204 @@ const LAYERS = [
     id: 'clients',
     label: 'Client Applications',
     sublabel: 'React Web + Expo Mobile',
-    icon: '💻📱',
-    color: '#a855f7',
-    bg: 'rgba(168,85,247,0.08)',
-    border: 'rgba(168,85,247,0.35)',
-    hoverBg: 'rgba(168,85,247,0.15)',
-    desc: 'React 18 (Vite + TypeScript) web app and Expo React Native mobile app. Both communicate via REST with JWT Bearer tokens.',
-    tags: ['React 18', 'Expo SDK 54', 'TypeScript', 'Axios', 'JWT'],
+    icon: Laptop,
+    color: '#ff785a', // Coral highlight
+    bg: 'rgba(224,86,56,0.06)',
+    border: 'rgba(224,86,56,0.25)',
+    hoverBg: 'rgba(224,86,56,0.15)',
+    desc: 'React 18 (Vite + TypeScript) web application alongside the Expo React Native mobile client. Both leverage secure HTTPS and real-time WebSockets to interact with the backend API.',
+    tags: ['React 18', 'Expo SDK 54', 'TypeScript', 'Axios', 'JWT Store'],
   },
   {
     id: 'gateway',
     label: 'ASP.NET Core Web API',
     sublabel: 'REST Gateway — api.nearusab.me',
-    icon: '🌐',
-    color: '#06b6d4',
-    bg: 'rgba(6,182,212,0.06)',
-    border: 'rgba(6,182,212,0.3)',
-    hoverBg: 'rgba(6,182,212,0.12)',
-    desc: 'The central API gateway handling routing, authentication middleware, CORS policy, rate limiting, and OpenAPI documentation via Scalar UI.',
+    icon: Network,
+    color: '#3b82f6', // Blue highlight
+    bg: 'rgba(59,130,246,0.06)',
+    border: 'rgba(59,130,246,0.25)',
+    hoverBg: 'rgba(59,130,246,0.15)',
+    desc: 'The centralized API Gateway handling routing, JWT authentication validation, CORS policy, rate limiting, and OpenAPI schema generation through Scalar UI.',
     tags: ['.NET 10', 'JWT Middleware', 'Rate Limiting', 'CORS', 'Scalar UI'],
   },
   {
     id: 'services',
     label: 'Service Layer',
     sublabel: 'Core Business Logic',
-    icon: '⚙️',
-    color: '#a855f7',
-    bg: 'rgba(168,85,247,0.05)',
-    border: 'rgba(168,85,247,0.25)',
-    hoverBg: 'rgba(168,85,247,0.12)',
-    desc: 'Encapsulates all business rules: order processing, delivery coordination, review management, job matching, and payment tier logic. Injected via ASP.NET DI.',
-    tags: ['Business Logic', 'DI Container', 'Dependency Injection', 'Service Pattern'],
+    icon: Cpu,
+    color: '#ff785a',
+    bg: 'rgba(224,86,56,0.04)',
+    border: 'rgba(224,86,56,0.2)',
+    hoverBg: 'rgba(224,86,56,0.12)',
+    desc: 'Encapsulates the core domain logic: order processing, dynamic driver matching, rating aggregations, job board queries, and business tier subscriptions. Injected dynamically via ASP.NET Core Dependency Injection.',
+    tags: ['Business Services', 'DI Container', 'Service Pattern', 'xUnit Verified'],
   },
   {
     id: 'repos',
     label: 'Repository Layer',
     sublabel: 'Data Access Abstraction',
-    icon: '📂',
-    color: '#06b6d4',
-    bg: 'rgba(6,182,212,0.04)',
-    border: 'rgba(6,182,212,0.2)',
-    hoverBg: 'rgba(6,182,212,0.1)',
-    desc: 'Repository pattern abstracts EF Core queries from business logic. Enables testability and future database swapping without touching business code.',
-    tags: ['Repository Pattern', 'EF Core', 'LINQ', 'Unit of Work'],
+    icon: FolderGit,
+    color: '#3b82f6',
+    bg: 'rgba(59,130,246,0.04)',
+    border: 'rgba(59,130,246,0.2)',
+    hoverBg: 'rgba(59,130,246,0.12)',
+    desc: 'Decoupled data access utilizing the Repository and Unit of Work patterns. Abstracts Entity Framework Core LINQ queries from business logic to ensure strict testability.',
+    tags: ['Repository Pattern', 'EF Core 10', 'LINQ Queries', 'Unit of Work'],
   },
   {
     id: 'database',
     label: 'PostgreSQL Database',
     sublabel: 'Railway Hosted — Production',
-    icon: '🗄️',
-    color: '#22c55e',
-    bg: 'rgba(34,197,94,0.05)',
-    border: 'rgba(34,197,94,0.25)',
-    hoverBg: 'rgba(34,197,94,0.1)',
-    desc: 'Primary relational data store with code-first migrations via EF Core. Hosted on Railway in production. Parameterized queries prevent SQL injection.',
-    tags: ['PostgreSQL', 'EF Core Migrations', 'Code-First', 'Railway Hosting'],
+    icon: Database,
+    color: '#10b981', // Green accent
+    bg: 'rgba(16,185,129,0.04)',
+    border: 'rgba(16,185,129,0.25)',
+    hoverBg: 'rgba(16,185,129,0.12)',
+    desc: 'The primary relational store, managed via EF Core code-first migrations. Production environment runs on Railway. Employs parameterized queries and indexing for rapid data delivery.',
+    tags: ['PostgreSQL', 'Code-First Migrations', 'Railway Hosting', 'SQL Safety'],
   },
 ];
 
 const SIDE_SERVICES = [
-  { icon: '🖼️', label: 'ImageKit', desc: 'Image storage & CDN delivery' },
-  { icon: '🔔', label: 'SignalR', desc: 'Real-time WebSocket notifications' },
-  { icon: '🐋', label: 'Docker', desc: 'Containerized production build' },
-  { icon: '🔑', label: 'ASP.NET Identity', desc: 'Role-based access control' },
+  { icon: Layers, label: 'ImageKit CDN', desc: 'Image optimization & CDN caching' },
+  { icon: Radio, label: 'SignalR Hubs', desc: 'Real-time WebSocket alerts' },
+  { icon: Container, label: 'Docker Container', desc: 'Containerized production build' },
+  { icon: Key, label: 'ASP.NET Identity', desc: 'Role-based access control' },
 ];
 
 const ArchitectureSection = () => {
-  const [hoveredLayer, setHoveredLayer] = useState(null);
+  const [hoveredLayer, setHoveredLayer] = useState('clients');
+  const activeDetail = LAYERS.find(l => l.id === hoveredLayer) || LAYERS[0];
+  const ActiveIcon = activeDetail.icon;
 
   return (
-    <section id="architecture" className="section-border-top py-24 px-4">
+    <section id="architecture" className="section-border-top py-24 px-4 bg-gradient-to-b from-transparent to-[#030508]/40">
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/25 text-violet-400 text-sm font-semibold mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
               Software Architecture
             </span>
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              System <span className="gradient-text">Architecture</span>
+              System <span className="gradient-text-coral text-glow-coral">Architecture</span>
             </h2>
-            <p className="text-slate-400 text-lg max-w-xl mx-auto">
-              Hover each layer to explore how the NearU platform is structured — from client to database.
+            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+              Hover over each layer of the interactive 3D stack to trace data flow through the NearU platform.
             </p>
           </div>
         </ScrollReveal>
 
-        <ScrollReveal>
-          <div className="grid lg:grid-cols-4 gap-6 items-start">
-            {/* Main Architecture Diagram */}
-            <div className="lg:col-span-3 space-y-2">
-              {LAYERS.map((layer, i) => (
-                <div key={layer.id} className="relative">
-                  {/* Connector arrow */}
-                  {i > 0 && (
-                    <div className="flex justify-center mb-2">
-                      <div className="flex flex-col items-center gap-1">
-                        <div className="w-0.5 h-4 bg-gradient-to-b from-violet-500/50 to-cyan-500/50" />
-                        <svg className="w-4 h-4 text-slate-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 3a1 1 0 01.707.293l6 6a1 1 0 01-1.414 1.414L10 5.414 4.707 10.707a1 1 0 01-1.414-1.414l6-6A1 1 0 0110 3z" clipRule="evenodd" transform="rotate(180 10 10)" />
-                        </svg>
-                      </div>
-                    </div>
-                  )}
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left Side: 3D Isometric Stack Visual */}
+          <div className="lg:col-span-6 flex justify-center items-center py-8">
+            <div className="perspective-container relative w-full max-w-[360px] h-[460px] flex items-center justify-center">
+              <div className="isometric-stack relative w-[300px] h-[200px]">
+                {LAYERS.map((layer, index) => {
+                  const LayerIcon = layer.icon;
+                  // Render stack bottom-to-top visually. Top layer (index 0) has highest translateZ.
+                  const offsetZ = (4 - index) * 64; 
+                  const isHovered = hoveredLayer === layer.id;
+                  
+                  return (
+                    <div
+                      key={layer.id}
+                      className="isometric-layer absolute inset-0 rounded-2xl border flex flex-col justify-between p-4 cursor-pointer select-none"
+                      style={{
+                        transform: `translateZ(${offsetZ + (isHovered ? 28 : 0)}px)`,
+                        backgroundColor: isHovered ? layer.hoverBg : layer.bg,
+                        borderColor: isHovered ? layer.color : layer.border,
+                        boxShadow: isHovered 
+                          ? `0 25px 50px rgba(0,0,0,0.65), 0 0 30px ${layer.color}35` 
+                          : `0 4px 12px rgba(0,0,0,0.45)`,
+                        zIndex: 20 - index,
+                      }}
+                      onMouseEnter={() => setHoveredLayer(layer.id)}
+                      onClick={() => setHoveredLayer(layer.id)}
+                    >
+                      {/* Isometric Grid Wireframe Overlay */}
+                      <div className="absolute inset-0 bg-grid-glow opacity-10 rounded-2xl pointer-events-none" />
 
-                  <div
-                    className="arch-layer rounded-xl px-6 py-4 border cursor-pointer transition-all duration-300"
-                    style={{
-                      background: hoveredLayer === layer.id ? layer.hoverBg : layer.bg,
-                      borderColor: hoveredLayer === layer.id ? layer.color : layer.border,
-                      boxShadow: hoveredLayer === layer.id ? `0 0 30px ${layer.color}20, 0 4px 20px rgba(0,0,0,0.3)` : 'none',
-                    }}
-                    onMouseEnter={() => setHoveredLayer(layer.id)}
-                    onMouseLeave={() => setHoveredLayer(null)}
-                    id={`arch-layer-${layer.id}`}
-                  >
-                    <div className="flex items-center justify-between flex-wrap gap-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">{layer.icon}</span>
-                        <div>
-                          <p className="font-bold text-white text-sm sm:text-base">{layer.label}</p>
-                          <p className="text-xs" style={{ color: layer.color }}>{layer.sublabel}</p>
+                      <div className="flex items-center justify-between relative z-10">
+                        <span className="text-xs font-black uppercase tracking-wider opacity-60" style={{ color: layer.color }}>
+                          Layer 0{5 - index}
+                        </span>
+                        <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/5 flex items-center justify-center">
+                          <LayerIcon className="w-4 h-4" style={{ color: layer.color }} />
                         </div>
                       </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {layer.tags.map((tag, ti) => (
-                          <span
-                            key={ti}
-                            className="text-xs px-2 py-0.5 rounded-full border font-medium"
-                            style={{ borderColor: `${layer.color}40`, color: layer.color, background: `${layer.color}10` }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
+
+                      <div className="relative z-10">
+                        <p className="font-black text-white text-base leading-tight">{layer.label}</p>
+                        <p className="text-[10px] font-semibold mt-0.5" style={{ color: layer.color }}>{layer.sublabel}</p>
                       </div>
                     </div>
-
-                    {/* Expanded description on hover */}
-                    <div
-                      className="overflow-hidden transition-all duration-300"
-                      style={{ maxHeight: hoveredLayer === layer.id ? '80px' : '0', opacity: hoveredLayer === layer.id ? 1 : 0 }}
-                    >
-                      <p className="text-slate-400 text-sm mt-3 pt-3 border-t" style={{ borderColor: `${layer.color}20` }}>
-                        {layer.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Side Services */}
-            <div className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-widest text-slate-600 mb-4">External Services</p>
-              {SIDE_SERVICES.map((svc, i) => (
-                <div key={i} className="glass-card p-4 text-center hover:border-violet-500/30 transition-all duration-200">
-                  <div className="text-2xl mb-2">{svc.icon}</div>
-                  <p className="text-sm font-bold text-white">{svc.label}</p>
-                  <p className="text-xs text-slate-600 mt-1">{svc.desc}</p>
-                </div>
-              ))}
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </ScrollReveal>
+
+          {/* Right Side: Active Detail Panel */}
+          <div className="lg:col-span-6 space-y-6">
+            {/* Dynamic Dashboard Card */}
+            <div className="glass-card p-8 border border-white/5 relative overflow-hidden transition-all duration-300">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-white/[0.01] to-transparent rounded-full pointer-events-none" />
+              
+              <div className="flex items-start gap-4 mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center flex-shrink-0">
+                  <ActiveIcon className="w-8 h-8" style={{ color: activeDetail.color }} />
+                </div>
+                <div>
+                  <span className="text-xs font-black uppercase tracking-widest px-2 py-0.5 rounded border" style={{ borderColor: `${activeDetail.color}30`, color: activeDetail.color, background: `${activeDetail.color}0d` }}>
+                    Active Layer Overview
+                  </span>
+                  <h3 className="text-2xl font-black text-white mt-2">{activeDetail.label}</h3>
+                  <p className="text-xs font-semibold" style={{ color: activeDetail.color }}>{activeDetail.sublabel}</p>
+                </div>
+              </div>
+
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 border-t border-white/5 pt-6">
+                {activeDetail.desc}
+              </p>
+
+              <div>
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Key Technologies</p>
+                <div className="flex flex-wrap gap-2">
+                  {activeDetail.tags.map((tag, ti) => (
+                    <span
+                      key={ti}
+                      className="text-xs px-2.5 py-1 rounded-lg border font-semibold"
+                      style={{ borderColor: `${activeDetail.color}25`, color: activeDetail.color, background: `${activeDetail.color}08` }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Side Services list */}
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-600 mb-4 pl-1">Side / Auxiliary Integrations</p>
+              <div className="grid grid-cols-2 gap-3">
+                {SIDE_SERVICES.map((svc, i) => {
+                  const SvcIcon = svc.icon;
+                  return (
+                    <div key={i} className="glass-card p-4 flex items-center gap-3 border border-white/5 hover:border-brand-coral/20 hover:scale-[1.02] transition-all">
+                      <div className="w-9 h-9 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-center flex-shrink-0">
+                        <SvcIcon className="w-4 h-4 text-brand-coral-light" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-white text-xs leading-none">{svc.label}</p>
+                        <p className="text-[10px] text-slate-500 mt-1 leading-tight">{svc.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
