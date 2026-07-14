@@ -1,55 +1,103 @@
 import React from 'react';
-import Card from '../Card';
-import PlaceholderImage from '../PlaceholderImage';
+import ScrollReveal from '../ScrollReveal';
 
-const AZURE_DIAGRAM_URL = "https://github.com/thimira20011/nearuportfolio-images/blob/main/Untitled%20Diagram.drawio%20(2).png?raw=true";
+// ============================================================
+// IMAGE PLACEHOLDERS — Replace URL below with your real Azure diagram
+// ============================================================
+// const IMG_AZURE_DIAGRAM = "YOUR_AZURE_ARCHITECTURE_DIAGRAM_URL_HERE";
+
+const AZURE_SERVICES = [
+  { icon: '🖥️', name: 'Azure App Service', desc: 'Hosts the containerized .NET API (Docker)' },
+  { icon: '🌐', name: 'Application Gateway', desc: 'Load balancing & SSL termination' },
+  { icon: '🚀', name: 'Azure CDN', desc: 'Static asset caching & global delivery' },
+  { icon: '🗄️', name: 'Azure SQL / PostgreSQL', desc: 'Managed relational database' },
+  { icon: '🗃️', name: 'Azure Blob Storage', desc: 'Images, menus, documents' },
+  { icon: '🔐', name: 'Entra ID (AAD)', desc: 'Identity & role management' },
+  { icon: '⚡', name: 'Azure Functions', desc: 'Serverless: image processing & notifications' },
+  { icon: '📧', name: 'Communication Services', desc: 'Email & SMS for order confirmations' },
+  { icon: '📦', name: 'Container Registry', desc: 'Docker image repository for CI/CD' },
+];
 
 const CloudSection = ({ openImageModal }) => (
-    <div className="space-y-6">
-        <Card title="Professional Azure Cloud Architecture">
-            {/* Azure Diagram - CLICKABLE */}
-            <div className="mt-4 mb-2 h-64 border-2 border-dashed border-indigo-500/50 rounded-xl">
-                <PlaceholderImage
-                    height="100%"
-                    width="100%"
-                    text="High-Level Azure Architecture Diagram"
-                    imageUrl={AZURE_DIAGRAM_URL}
-                    onClick={() => openImageModal(AZURE_DIAGRAM_URL)} // Click handler IS applied
-                />
-            </div>
-            <p className="text-center text-gray-400 text-sm mb-4">Click to view full diagram.</p>
+  <section id="cloud" className="section-border-top py-24 px-4">
+    <div className="max-w-6xl mx-auto">
+      <ScrollReveal>
+        <div className="text-center mb-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 text-sm font-semibold mb-4">
+            Cloud Infrastructure
+          </span>
+          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
+            Azure Cloud <span className="gradient-text">Strategy</span>
+          </h2>
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            Designed for reliability and scalability using Azure as the industry-standard cloud platform.
+          </p>
+        </div>
+      </ScrollReveal>
 
-            <p className="text-gray-300 mb-4">
-                Our infrastructure is designed for scalability and reliability, utilizing <strong>Azure</strong> as the industry-standard platform.
+      {/* Architecture Diagram Placeholder */}
+      <ScrollReveal delay={1}>
+        <div
+          className="glass-card p-2 mb-12 border-dashed border-2 border-cyan-500/20 group cursor-pointer overflow-hidden rounded-2xl"
+          onClick={() => openImageModal && openImageModal(null)}
+        >
+          <div className="aspect-video rounded-xl bg-gradient-to-br from-cyan-500/5 to-violet-500/5 flex flex-col items-center justify-center border border-white/5">
+            <span className="text-5xl mb-4">☁️</span>
+            <p className="text-slate-500 font-semibold text-sm">Azure Architecture Diagram</p>
+            <p className="text-slate-700 text-xs mt-1">
+              {/* Replace IMG_AZURE_DIAGRAM constant above with your real diagram URL */}
+              Add your Azure architecture diagram image URL to display here
             </p>
-            <div className="grid lg:grid-cols-2 gap-4">
-                <div className="bg-gray-700 p-4 rounded-lg border-l-4 border-indigo-500">
-                    <p className="font-bold text-indigo-300">Application Layer</p>
-                    <ul className="text-sm text-gray-400 list-disc list-inside ml-2 mt-1">
-                        <li><b>Compute:</b> Azure App Service (or VM + Docker)</li>
-                        <li><b>Traffic:</b> Azure Application Gateway</li>
-                        <li><b>Delivery:</b> Azure CDN (for static caching)</li>
-                    </ul>
-                </div>
-                <div className="bg-gray-700 p-4 rounded-lg border-l-4 border-yellow-500">
-                    <p className="font-bold text-yellow-300">Data & Storage</p>
-                    <ul className="text-sm text-gray-400 list-disc list-inside ml-2 mt-1">
-                        <li><b>Relational DB:</b> Azure SQL Database</li>
-                        <li><b>File Assets:</b> Azure Blob Storage (Images, menus, docs)</li>
-                        <li><b>Security:</b> App Service Certificates and Entra ID (Role Mgmt)</li>
-                    </ul>
-                </div>
-                <div className="bg-gray-700 p-4 rounded-lg border-l-4 border-red-500 col-span-full">
-                    <p className="font-bold text-red-300">Event-Driven Serverless Layer (Azure Functions)</p>
-                    <ul className="text-sm text-gray-400 list-disc list-inside ml-2 mt-1">
-                        <li><b>Triggers:</b> Image processing (resize/compress before Blob storage).</li>
-                        <li><b>Notifications:</b> Email/SMS for order confirmations via <b>Azure Communication Services</b>.</li>
-                        <li><b>Maintenance:</b> Scheduled tasks (cleanup expired subscriptions).</li>
-                    </ul>
-                </div>
+          </div>
+        </div>
+      </ScrollReveal>
+
+      {/* Azure Services Grid */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        {AZURE_SERVICES.map((svc, i) => (
+          <ScrollReveal key={i} delay={Math.floor(i / 3) + 1}>
+            <div className="glass-card p-5 flex items-start gap-4 group hover:border-cyan-500/30 transition-all duration-200">
+              <span className="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-200">{svc.icon}</span>
+              <div>
+                <p className="font-bold text-white text-sm">{svc.name}</p>
+                <p className="text-slate-500 text-xs mt-1">{svc.desc}</p>
+              </div>
             </div>
-        </Card>
+          </ScrollReveal>
+        ))}
+      </div>
+
+      {/* Tiered Architecture Breakdown */}
+      <ScrollReveal>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div className="glass-card p-6 border-l-4 border-violet-500">
+            <p className="text-violet-400 font-bold text-xs uppercase tracking-wider mb-3">Application Layer</p>
+            <ul className="space-y-2 text-slate-400 text-sm">
+              <li><strong className="text-white">Compute:</strong> Azure App Service (Docker)</li>
+              <li><strong className="text-white">Traffic:</strong> Azure Application Gateway</li>
+              <li><strong className="text-white">Delivery:</strong> Azure CDN</li>
+            </ul>
+          </div>
+          <div className="glass-card p-6 border-l-4 border-cyan-500">
+            <p className="text-cyan-400 font-bold text-xs uppercase tracking-wider mb-3">Data & Storage</p>
+            <ul className="space-y-2 text-slate-400 text-sm">
+              <li><strong className="text-white">DB:</strong> Azure SQL / PostgreSQL</li>
+              <li><strong className="text-white">Files:</strong> Azure Blob Storage</li>
+              <li><strong className="text-white">Security:</strong> Entra ID</li>
+            </ul>
+          </div>
+          <div className="glass-card p-6 border-l-4 border-green-500">
+            <p className="text-green-400 font-bold text-xs uppercase tracking-wider mb-3">Serverless Functions</p>
+            <ul className="space-y-2 text-slate-400 text-sm">
+              <li><strong className="text-white">Images:</strong> Resize on upload</li>
+              <li><strong className="text-white">Notify:</strong> Email/SMS via Comms</li>
+              <li><strong className="text-white">Tasks:</strong> Scheduled cleanup</li>
+            </ul>
+          </div>
+        </div>
+      </ScrollReveal>
     </div>
+  </section>
 );
 
 export default CloudSection;
