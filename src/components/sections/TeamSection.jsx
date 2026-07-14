@@ -1,6 +1,7 @@
 import React from 'react';
 import { Github, Linkedin, Award } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import TiltCard from '../TiltCard';
 
 // ============================================================
 // TEAM PHOTO PLACEHOLDERS — Replace these URL strings with real photos
@@ -92,8 +93,9 @@ const TeamSection = () => (
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         {TEAM.map((member, i) => (
           <ScrollReveal key={i} delay={i + 1}>
-            <div
-              className="glass-card p-6 flex flex-col items-center text-center group hover:scale-105 transition-all duration-300 border border-white/5"
+            <TiltCard
+              glowColor={`${member.color}60`}
+              className="glass-card p-6 flex flex-col items-center text-center group hover:scale-105 transition-all duration-300 border border-white/5 h-full"
               style={{ '--member-color': member.color }}
             >
               {/* Avatar */}
@@ -148,7 +150,7 @@ const TeamSection = () => (
                   <Linkedin className="w-4 h-4" />
                 </a>
               </div>
-            </div>
+            </TiltCard>
           </ScrollReveal>
         ))}
       </div>
@@ -161,15 +163,20 @@ const TeamSection = () => (
         </div>
         <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           {SUPERVISORS.map((sup, i) => (
-            <div key={i} className="glass-card p-6 flex items-center gap-4 border border-white/5 hover:border-brand-coral/20 hover:scale-[1.01] transition-all">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-coral to-brand-coral-dark flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-coral/20">
-                <Award className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="font-black text-white text-sm sm:text-base">{sup.name}</p>
-                <p className="text-brand-coral-light text-xs sm:text-sm font-semibold">{sup.title}</p>
-                <p className="text-slate-500 text-xs mt-0.5">{sup.dept}</p>
-              </div>
+            <div key={i} className="h-full">
+              <TiltCard
+                glowColor="rgba(224, 86, 56, 0.25)"
+                className="glass-card p-6 flex items-center gap-4 border border-white/5 hover:border-brand-coral/20 hover:scale-[1.01] transition-all h-full"
+              >
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-coral to-brand-coral-dark flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-coral/20">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-black text-white text-sm sm:text-base">{sup.name}</p>
+                  <p className="text-brand-coral-light text-xs sm:text-sm font-semibold">{sup.title}</p>
+                  <p className="text-slate-500 text-xs mt-0.5">{sup.dept}</p>
+                </div>
+              </TiltCard>
             </div>
           ))}
         </div>

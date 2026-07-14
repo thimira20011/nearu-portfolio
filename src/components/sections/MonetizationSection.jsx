@@ -11,6 +11,7 @@ import {
   Check 
 } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import TiltCard from '../TiltCard';
 
 const TIERS = [
   {
@@ -76,12 +77,14 @@ const MonetizationSection = () => (
           const TierIcon = tier.icon;
           return (
             <ScrollReveal key={i} delay={i + 1}>
-              <div className={`glass-card p-6 h-full border ${tier.borderClass} flex flex-col ${
-                tier.highlight 
-                  ? 'ring-1 ring-brand-coral/30 shadow-lg shadow-brand-coral/10 hover:scale-105' 
-                  : 'hover:scale-105'
-              } transition-all duration-300 relative`}>
-                
+              <TiltCard
+                glowColor={tier.highlight ? 'rgba(224, 86, 56, 0.4)' : tier.color === '#fbbf24' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(29, 118, 202, 0.3)'}
+                className={`glass-card p-6 h-full border ${tier.borderClass} flex flex-col ${
+                  tier.highlight 
+                    ? 'ring-1 ring-brand-coral/30 shadow-lg shadow-brand-coral/10 hover:scale-105' 
+                    : 'hover:scale-105'
+                } transition-all duration-300 relative`}
+              >
                 {tier.highlight && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                     <span className="px-3 py-1 rounded-full bg-brand-coral text-white text-[10px] font-black uppercase tracking-wider shadow-lg shadow-brand-coral/40">
@@ -111,7 +114,7 @@ const MonetizationSection = () => (
                     </li>
                   ))}
                 </ul>
-              </div>
+              </TiltCard>
             </ScrollReveal>
           );
         })}
@@ -127,18 +130,23 @@ const MonetizationSection = () => (
             Future Roadmap
           </h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {ROADMAP.map((item, i) => {
+             {ROADMAP.map((item, i) => {
               const RoadIcon = item.icon;
               return (
-                <div key={i} className="p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-brand-coral/25 transition-all duration-300">
-                  <p className="text-[10px] font-black uppercase tracking-wider mb-2" style={{ color: item.color }}>{item.phase}</p>
-                  
-                  <div className="w-8 h-8 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-center mb-3">
-                    <RoadIcon className="w-4 h-4" style={{ color: item.color }} />
-                  </div>
-                  
-                  <p className="font-bold text-white text-sm mb-1">{item.title}</p>
-                  <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                <div key={i} className="h-full">
+                  <TiltCard
+                    glowColor={`${item.color}35`}
+                    className="p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-[#0c0f1a]/40 hover:border-brand-coral/25 transition-all duration-300 h-full"
+                  >
+                    <p className="text-[10px] font-black uppercase tracking-wider mb-2" style={{ color: item.color }}>{item.phase}</p>
+                    
+                    <div className="w-8 h-8 rounded-lg bg-white/[0.02] border border-white/5 flex items-center justify-center mb-3">
+                      <RoadIcon className="w-4 h-4" style={{ color: item.color }} />
+                    </div>
+                    
+                    <p className="font-bold text-white text-sm mb-1">{item.title}</p>
+                    <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                  </TiltCard>
                 </div>
               );
             })}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GraduationCap, Bike, Store, Shield, Lock, Check } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import TiltCard from '../TiltCard';
 
 const ROLES = [
   {
@@ -41,36 +42,35 @@ const ROLES = [
   {
     id: 'business',
     icon: Store,
-    title: 'Campus Businesses',
+    title: 'Local Businesses',
     color: 'amber',
-    borderColor: 'border-amber-500/40',
-    glowColor: 'hover:shadow-amber-500/10 hover:border-amber-500/60',
+    borderColor: 'border-amber-500/30',
+    glowColor: 'hover:shadow-amber-500/10 hover:border-amber-500/50',
     badgeClass: 'bg-amber-500/15 text-amber-400',
     features: [
-      'Register & manage professional business profiles',
-      'Upload photos, menus, pricing & service details',
-      'Manage incoming orders & appointments',
-      'Post deals & promotional offers to student feed',
-      'Dashboard: views, ratings & sales overview',
-      'Respond to customer reviews',
-      'Post job openings for student applicants',
+      'Create & manage business profiles',
+      'List products/services with pricing & details',
+      'Create and update discounts/promos',
+      'Manage incoming orders and request delivery riders',
+      'Reply to student reviews & ratings',
+      'View sales reports & analytics dashboard',
     ],
   },
   {
     id: 'admin',
     icon: Shield,
-    title: 'Platform Admin',
+    title: 'Platform Admins',
     color: 'slate',
-    borderColor: 'border-slate-500/40',
-    glowColor: 'hover:shadow-slate-500/10 hover:border-slate-500/60',
+    borderColor: 'border-slate-500/30',
+    glowColor: 'hover:shadow-slate-500/10 hover:border-slate-500/50',
     badgeClass: 'bg-slate-500/15 text-slate-300',
     features: [
-      'Approve / reject business registrations',
-      'Moderate reported users & reviews',
-      'Manage monetization & subscription tiers',
-      'Remove services with poor ratings',
-      'Platform-wide analytics dashboard',
-      'Manage disclaimer & policy content',
+      'Approve & moderate business registrations',
+      'Manage user accounts & active roles',
+      'Monitor active deliveries & rider logs',
+      'Handle system reports & disputes',
+      'Configure platform fees & commissions',
+      'Access platform-wide financial statements',
     ],
   },
 ];
@@ -123,7 +123,10 @@ const FeaturesSection = () => {
 
         {/* Active Role Card */}
         <ScrollReveal>
-          <div className={`glass-card p-8 sm:p-10 border ${active.borderColor} ${active.glowColor} transition-all duration-300`}>
+          <TiltCard
+            glowColor={active.id === 'student' ? 'rgba(224, 86, 56, 0.3)' : active.id === 'rider' ? 'rgba(15, 76, 129, 0.3)' : active.id === 'business' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(100, 116, 139, 0.25)'}
+            className={`glass-card p-8 sm:p-10 border ${active.borderColor} ${active.glowColor} transition-all duration-300`}
+          >
             <div className="flex items-start gap-4 mb-8">
               <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
                 <ActiveIcon className={`w-8 h-8 ${active.id === 'student' ? 'text-brand-coral-light' : active.id === 'rider' ? 'text-brand-blue-light' : active.id === 'business' ? 'text-amber-400' : 'text-slate-300'}`} />
@@ -150,12 +153,15 @@ const FeaturesSection = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </TiltCard>
         </ScrollReveal>
 
         {/* Safety & Moderation banner */}
         <ScrollReveal delay={2}>
-          <div className="mt-8 glass-card p-6 border border-brand-coral/20 bg-brand-coral/[0.01]">
+          <TiltCard
+            glowColor="rgba(224, 86, 56, 0.25)"
+            className="mt-8 glass-card p-6 border border-brand-coral/20 bg-brand-coral/[0.01]"
+          >
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-xl bg-brand-coral/10 flex items-center justify-center flex-shrink-0 border border-brand-coral/20">
                 <Lock className="w-5 h-5 text-brand-coral-light" />
@@ -170,7 +176,7 @@ const FeaturesSection = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </TiltCard>
         </ScrollReveal>
       </div>
     </section>
