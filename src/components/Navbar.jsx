@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Menu, X } from 'lucide-react';
+import nearuLogo from '../assets/logo.svg';
 
 const NAV_LINKS = [
   { id: 'overview', label: 'Overview' },
@@ -17,10 +18,17 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
+
+      // Scroll Progress Calculation
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
 
       let current = '';
       NAV_LINKS.forEach(({ id }) => {
@@ -62,9 +70,7 @@ const Navbar = () => {
           className="flex items-center gap-2 group.first-letter"
           aria-label="Back to top"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-coral to-brand-coral-light flex items-center justify-center shadow-lg shadow-brand-coral/30 group-hover:shadow-brand-coral/50 transition-all duration-300">
-            <span className="text-white font-black text-sm">N</span>
-          </div>
+          <img src={nearuLogo} className="w-8 h-8 object-contain" alt="NearU Logo" />
           <span className="font-bold text-white text-lg tracking-tight hover:opacity-90 transition-opacity">
             Near<span className="gradient-text-coral">U</span>
           </span>
@@ -135,6 +141,12 @@ const Navbar = () => {
           </ul>
         </div>
       )}
+
+      {/* Scroll Progress Bar */}
+      <div 
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-coral to-brand-blue-light transition-all duration-75" 
+        style={{ width: `${scrollProgress}%` }}
+      />
     </nav>
   );
 };
