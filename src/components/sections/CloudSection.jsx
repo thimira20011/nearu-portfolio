@@ -14,6 +14,7 @@ import {
   Info 
 } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import SectionHeader from '../SectionHeader';
 
 const AZURE_SERVICES = [
   { icon: AppWindow, name: 'Azure App Service', desc: 'Hosts the containerized .NET API in Docker' },
@@ -63,19 +64,13 @@ const CloudSection = () => {
   return (
     <section id="cloud" className="section-border-top py-24 px-4 bg-gradient-to-b from-[#030508]/40 to-transparent">
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-blue/10 border border-brand-blue/25 text-brand-blue-light text-sm font-semibold mb-4">
-              Cloud Infrastructure
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Azure Cloud <span className="gradient-text-blue text-glow-blue">Strategy</span>
-            </h2>
-            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-              Production-grade architecture designed for extreme availability, horizontal scaling, and secure data handling.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeader
+          badge="Cloud Infrastructure"
+          titleStart="Azure Cloud"
+          highlight="Strategy"
+          subtitle="Production-grade architecture designed for extreme availability, horizontal scaling, and secure data handling."
+          variant="blue"
+        />
 
         {/* 3D Topology Interactive SVG */}
         <ScrollReveal delay={1}>
@@ -128,16 +123,24 @@ const CloudSection = () => {
 
                   {/* Nodes */}
                   {/* 1. Client Endpoint */}
-                  <g transform="translate(50, 175)" className="cursor-pointer">
+                  <g transform="translate(50, 175)" aria-label="Client endpoints" role="img">
                     <circle cx="0" cy="0" r="14" fill="#0b0e17" stroke="#1d76ca" strokeWidth="2" />
                     <circle cx="0" cy="0" r="4" fill="#1d76ca" />
                     <text x="0" y="28" fill="#94a3b8" fontSize="10" fontWeight="bold" textAnchor="middle">Clients</text>
                   </g>
 
                   {/* 2. Gateway Node */}
-                  <g transform="translate(180, 175)" className="cursor-pointer" onClick={() => setActiveNode('gateway')}>
+                  <g
+                    transform="translate(180, 175)"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Azure Application Gateway — click to inspect"
+                    aria-pressed={activeNode === 'gateway'}
+                    onClick={() => setActiveNode('gateway')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveNode('gateway'); } }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <circle cx="0" cy="0" r="28" fill="#0c0f1a" stroke={activeNode === 'gateway' ? '#1d76ca' : '#1e293b'} strokeWidth={activeNode === 'gateway' ? 3 : 1.5} className="transition-all duration-300" />
-                    {/* SVG Icon representation inside */}
                     <g transform="translate(-10, -10) scale(0.85)" stroke={activeNode === 'gateway' ? '#1d76ca' : '#64748b'} strokeWidth="2" fill="none">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </g>
@@ -145,7 +148,16 @@ const CloudSection = () => {
                   </g>
 
                   {/* 3. Central Web API (App Service) */}
-                  <g transform="translate(350, 175)" className="cursor-pointer" onClick={() => setActiveNode('appservice')}>
+                  <g
+                    transform="translate(350, 175)"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Azure App Service — click to inspect"
+                    aria-pressed={activeNode === 'appservice'}
+                    onClick={() => setActiveNode('appservice')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveNode('appservice'); } }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <circle cx="0" cy="0" r="34" fill="#0c0f1a" stroke={activeNode === 'appservice' ? '#3b82f6' : '#1e293b'} strokeWidth={activeNode === 'appservice' ? 3.5 : 1.5} />
                     <g transform="translate(-12, -12) scale(1)" stroke={activeNode === 'appservice' ? '#3b82f6' : '#64748b'} strokeWidth="2" fill="none">
                       <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a6 6 0 0 0 0-12z" />
@@ -154,7 +166,16 @@ const CloudSection = () => {
                   </g>
 
                   {/* 4. Blob Storage (Top Right) */}
-                  <g transform="translate(520, 90)" className="cursor-pointer" onClick={() => setActiveNode('blob')}>
+                  <g
+                    transform="translate(520, 90)"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Azure Blob Storage — click to inspect"
+                    aria-pressed={activeNode === 'blob'}
+                    onClick={() => setActiveNode('blob')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveNode('blob'); } }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <circle cx="0" cy="0" r="28" fill="#0c0f1a" stroke={activeNode === 'blob' ? '#ff785a' : '#1e293b'} strokeWidth={activeNode === 'blob' ? 3 : 1.5} />
                     <g transform="translate(-10, -10) scale(0.85)" stroke={activeNode === 'blob' ? '#ff785a' : '#64748b'} strokeWidth="2" fill="none">
                       <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
@@ -163,7 +184,16 @@ const CloudSection = () => {
                   </g>
 
                   {/* 5. Database (Bottom Right) */}
-                  <g transform="translate(520, 260)" className="cursor-pointer" onClick={() => setActiveNode('db')}>
+                  <g
+                    transform="translate(520, 260)"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Azure Database / PostgreSQL — click to inspect"
+                    aria-pressed={activeNode === 'db'}
+                    onClick={() => setActiveNode('db')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveNode('db'); } }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <circle cx="0" cy="0" r="28" fill="#0c0f1a" stroke={activeNode === 'db' ? '#10b981' : '#1e293b'} strokeWidth={activeNode === 'db' ? 3 : 1.5} />
                     <g transform="translate(-10, -10) scale(0.85)" stroke={activeNode === 'db' ? '#10b981' : '#64748b'} strokeWidth="2" fill="none">
                       <ellipse cx="12" cy="5" rx="9" ry="3" />
@@ -174,7 +204,16 @@ const CloudSection = () => {
                   </g>
 
                   {/* 6. Azure Functions (Bottom Left of Center) */}
-                  <g transform="translate(420, 270)" className="cursor-pointer" onClick={() => setActiveNode('functions')}>
+                  <g
+                    transform="translate(420, 270)"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Azure Serverless Functions — click to inspect"
+                    aria-pressed={activeNode === 'functions'}
+                    onClick={() => setActiveNode('functions')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveNode('functions'); } }}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <circle cx="0" cy="0" r="24" fill="#0c0f1a" stroke={activeNode === 'functions' ? '#e05638' : '#1e293b'} strokeWidth={activeNode === 'functions' ? 2.5 : 1.5} />
                     <g transform="translate(-8, -9) scale(0.75)" stroke={activeNode === 'functions' ? '#e05638' : '#64748b'} strokeWidth="2" fill="none">
                       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />

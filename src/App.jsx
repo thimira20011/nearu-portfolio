@@ -20,14 +20,6 @@ import TeamSection from './components/sections/TeamSection';
 import { FooterSection, Footer } from './components/sections/FooterSection';
 
 const App = () => {
-  React.useEffect(() => {
-    const handleScroll = () => {
-      document.documentElement.style.setProperty('--scroll', window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen antialiased" style={{ background: '#05050f', color: '#f1f5f9' }}>
       {/* Global Cursor Glow Effect */}

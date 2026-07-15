@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { GraduationCap, Bike, Store, Shield, Lock, Check } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
 import TiltCard from '../TiltCard';
+import SectionHeader from '../SectionHeader';
+import { COLOR_PRESETS } from '../../utils/colors';
 
 const ROLES = [
   {
@@ -79,36 +81,38 @@ const FeaturesSection = () => {
   const [activeRole, setActiveRole] = useState('student');
   const active = ROLES.find(r => r.id === activeRole);
   const ActiveIcon = active.icon;
+  const colorSet = COLOR_PRESETS[active.color];
 
   return (
     <section id="features" className="section-border-top py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-              Core Features
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Built for <span className="gradient-text-coral text-glow-coral">Every Role</span>
-            </h2>
-            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-              NearU adapts dynamically to four distinct roles, each with a tailored interface and workflow.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeader
+          badge="Core Features"
+          titleStart="Built for"
+          highlight="Every Role"
+          subtitle="NearU adapts dynamically to four distinct roles, each with a tailored interface and workflow."
+        />
 
-        {/* Role Selector Tabs */}
+        {/* Role Selector Tabs — fully accessible */}
         <ScrollReveal delay={1}>
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
+          <div
+            role="tablist"
+            aria-label="User role selector"
+            className="flex flex-wrap justify-center gap-3 mb-10"
+          >
             {ROLES.map(role => {
               const RoleIcon = role.icon;
+              const isActive = activeRole === role.id;
               return (
                 <button
                   key={role.id}
-                  onClick={() => setActiveRole(role.id)}
+                  role="tab"
                   id={`role-tab-${role.id}`}
+                  aria-selected={isActive}
+                  aria-controls={`role-panel-${role.id}`}
+                  onClick={() => setActiveRole(role.id)}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all duration-300 border ${
-                    activeRole === role.id
+                    isActive
                       ? `${role.borderColor} ${role.badgeClass} shadow-lg shadow-brand-coral/5`
                       : 'border-white/10 text-slate-500 hover:text-white hover:border-white/20 hover:bg-white/5'
                   }`}
@@ -121,39 +125,46 @@ const FeaturesSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Active Role Card */}
+        {/* Active Role Card — key triggers tab-fade-in animation on switch */}
         <ScrollReveal>
-          <TiltCard
-            glowColor={active.id === 'student' ? 'rgba(224, 86, 56, 0.3)' : active.id === 'rider' ? 'rgba(15, 76, 129, 0.3)' : active.id === 'business' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(100, 116, 139, 0.25)'}
-            className={`glass-card p-8 sm:p-10 border ${active.borderColor} ${active.glowColor} transition-all duration-300`}
+          <div
+            key={active.id}
+            id={`role-panel-${active.id}`}
+            role="tabpanel"
+            aria-labelledby={`role-tab-${active.id}`}
+            className="tab-fade-in"
           >
-            <div className="flex items-start gap-4 mb-8">
-              <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
-                <ActiveIcon className={`w-8 h-8 ${active.id === 'student' ? 'text-brand-coral-light' : active.id === 'rider' ? 'text-brand-blue-light' : active.id === 'business' ? 'text-amber-400' : 'text-slate-300'}`} />
-              </div>
-              <div>
-                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${active.badgeClass} mb-2`}>
-                  {active.title}
-                </span>
-                <h3 className="text-2xl font-black text-white">
-                  {active.title} Features
-                </h3>
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-3">
-              {active.features.map((feat, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors duration-200"
-                  style={{ animationDelay: `${i * 60}ms` }}
-                >
-                  <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${active.id === 'student' ? 'text-brand-coral-light' : active.id === 'rider' ? 'text-brand-blue-light' : active.id === 'business' ? 'text-amber-400' : 'text-slate-300'}`} />
-                  <span className="text-slate-300 text-sm">{feat}</span>
+            <TiltCard
+              glowColor={colorSet.glow(0.28)}
+              className={`glass-card p-8 sm:p-10 border ${active.borderColor} ${active.glowColor} transition-all duration-300`}
+            >
+              <div className="flex items-start gap-4 mb-8">
+                <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center">
+                  <ActiveIcon className={`w-8 h-8 ${colorSet.text}`} />
                 </div>
-              ))}
-            </div>
-          </TiltCard>
+                <div>
+                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${active.badgeClass} mb-2`}>
+                    {active.title}
+                  </span>
+                  <h3 className="text-2xl font-black text-white">
+                    {active.title} Features
+                  </h3>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {active.features.map((feat, i) => (
+                  <div
+                    key={feat}
+                    className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors duration-200"
+                  >
+                    <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${colorSet.text}`} />
+                    <span className="text-slate-300 text-sm">{feat}</span>
+                  </div>
+                ))}
+              </div>
+            </TiltCard>
+          </div>
         </ScrollReveal>
 
         {/* Safety & Moderation banner */}

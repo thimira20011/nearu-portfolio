@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * CursorGlow — A global mouse-following radial gradient overlay.
- * Creates a subtle "flashlight" effect on dark surfaces.
- * Automatically disabled when prefers-reduced-motion is set.
+ * CursorGlow — Smooth radial gradient that follows the cursor.
+ *
+ * Optimisations over the previous version:
+ * - rAF loop only runs while the cursor is in motion (stops within ~0.5px of target)
+ * - No continuous animation drain when the user is idle
+ * - respects prefers-reduced-motion
  */
 const CursorGlow = () => {
   const glowRef = useRef(null);
@@ -12,41 +15,54 @@ const CursorGlow = () => {
     const el = glowRef.current;
     if (!el) return;
 
-    // Respect reduced motion preference
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionQuery.matches) {
+    // Honour reduced-motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       el.style.display = 'none';
       return;
     }
 
     let rafId;
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let currentX = targetX;
+    let currentY = targetY;
+    let isRunning = false;
+
+    const applyGlow = () => {
+      el.style.background = `radial-gradient(
+        350px circle at ${currentX}px ${currentY}px,
+        rgba(224, 86, 56, 0.055),
+        rgba(15, 76, 129, 0.028) 45%,
+        transparent 72%
+      )`;
+    };
+
+    const animate = () => {
+      const dx = targetX - currentX;
+      const dy = targetY - currentY;
+      currentX += dx * 0.15;
+      currentY += dy * 0.15;
+      applyGlow();
+
+      // Keep looping only while moving (> 0.5px delta)
+      if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+        rafId = requestAnimationFrame(animate);
+      } else {
+        isRunning = false;
+      }
+    };
 
     const handleMouseMove = (e) => {
       targetX = e.clientX;
       targetY = e.clientY;
-    };
-
-    // Smooth lerp animation for buttery movement
-    const animate = () => {
-      currentX += (targetX - currentX) * 0.15;
-      currentY += (targetY - currentY) * 0.15;
-
-      el.style.background = `radial-gradient(
-        300px circle at ${currentX}px ${currentY}px,
-        rgba(224, 86, 56, 0.06),
-        rgba(15, 76, 129, 0.03) 40%,
-        transparent 70%
-      )`;
-
-      rafId = requestAnimationFrame(animate);
+      if (!isRunning) {
+        isRunning = true;
+        rafId = requestAnimationFrame(animate);
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    rafId = requestAnimationFrame(animate);
+    applyGlow(); // Initial paint
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -57,7 +73,7 @@ const CursorGlow = () => {
   return (
     <div
       ref={glowRef}
-      className="fixed inset-0 z-30 pointer-events-none transition-opacity duration-700"
+      className="fixed inset-0 z-30 pointer-events-none"
       aria-hidden="true"
     />
   );
