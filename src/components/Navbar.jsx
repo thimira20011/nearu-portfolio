@@ -1,55 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Github, Menu, X } from 'lucide-react';
 import nearuLogo from '../assets/logo.svg';
+import useScrollState from '../hooks/useScrollState';
 
 const NAV_LINKS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'features', label: 'Features' },
-  { id: 'tech', label: 'Tech Stack' },
-  { id: 'architecture', label: 'Architecture' },
-  { id: 'cloud', label: 'Cloud' },
-  { id: 'cicd', label: 'CI/CD' },
-  { id: 'timeline', label: 'Timeline' },
-  { id: 'monetization', label: 'Roadmap' },
-  { id: 'team', label: 'Team' },
+  { id: 'overview',      label: 'Overview'     },
+  { id: 'features',      label: 'Features'     },
+  { id: 'tech',          label: 'Tech Stack'   },
+  { id: 'architecture',  label: 'Architecture' },
+  { id: 'cloud',         label: 'Cloud'        },
+  { id: 'cicd',          label: 'CI/CD'        },
+  { id: 'timeline',      label: 'Timeline'     },
+  { id: 'monetization',  label: 'Roadmap'      },
+  { id: 'team',          label: 'Team'         },
 ];
 
+const NAV_IDS = NAV_LINKS.map((l) => l.id);
+
 const Navbar = () => {
-  const [activeSection, setActiveSection] = useState('');
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-
-      // Scroll Progress Calculation
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        setScrollProgress((window.scrollY / totalScroll) * 100);
-      }
-
-      let current = '';
-      NAV_LINKS.forEach(({ id }) => {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) current = id;
-        }
-      });
-      setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { scrollY, scrollProgress, activeSection } = useScrollState(NAV_IDS);
+  const scrolled = scrollY > 40;
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      const offset = 80;
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top, behavior: 'smooth' });
     }
     setMenuOpen(false);
@@ -62,12 +38,14 @@ const Navbar = () => {
           ? 'bg-[#030508]/85 backdrop-blur-xl border-b border-brand-coral/15 shadow-lg shadow-brand-coral/5'
           : 'bg-transparent'
       }`}
+      role="navigation"
+      aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="flex items-center gap-2 group.first-letter"
+          className="flex items-center gap-2"
           aria-label="Back to top"
         >
           <img src={nearuLogo} className="w-8 h-8 object-contain" alt="NearU Logo" />
@@ -77,11 +55,12 @@ const Navbar = () => {
         </button>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden lg:flex items-center gap-1">
+        <ul className="hidden lg:flex items-center gap-1" role="list">
           {NAV_LINKS.map(({ id, label }) => (
             <li key={id}>
               <button
                 onClick={() => scrollTo(id)}
+                aria-current={activeSection === id ? 'true' : undefined}
                 className={`relative px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 ${
                   activeSection === id
                     ? 'text-brand-coral-light bg-brand-coral/10 font-semibold'
@@ -113,21 +92,33 @@ const Navbar = () => {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden flex items-center justify-center p-2 rounded-lg hover:bg-white/5 text-white transition-colors"
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="lg:hidden bg-[#0c0f1a]/95 backdrop-blur-xl border-b border-brand-coral/15">
-          <ul className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
+      {/*
+        Mobile Menu — CSS max-height transition instead of conditional render.
+        This enables a smooth slide-down / slide-up animation on open/close.
+      */}
+      <div
+        id="mobile-menu"
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          menuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="bg-[#0c0f1a]/95 backdrop-blur-xl border-b border-brand-coral/15">
+          <ul className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1" role="list">
             {NAV_LINKS.map(({ id, label }) => (
               <li key={id}>
                 <button
                   onClick={() => scrollTo(id)}
+                  aria-current={activeSection === id ? 'true' : undefined}
                   className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                     activeSection === id
                       ? 'text-brand-coral-light bg-brand-coral/15 font-semibold'
@@ -140,12 +131,17 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
-      )}
+      </div>
 
       {/* Scroll Progress Bar */}
-      <div 
-        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-coral to-brand-blue-light transition-all duration-75" 
+      <div
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-coral to-brand-blue-light transition-all duration-75"
         style={{ width: `${scrollProgress}%` }}
+        role="progressbar"
+        aria-valuenow={Math.round(scrollProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Page scroll progress"
       />
     </nav>
   );

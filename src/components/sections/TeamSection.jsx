@@ -2,6 +2,7 @@ import React from 'react';
 import { Github, Linkedin, Award } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
 import TiltCard from '../TiltCard';
+import SectionHeader from '../SectionHeader';
 
 // ============================================================
 // TEAM PHOTO PLACEHOLDERS — Replace these URL strings with real photos
@@ -75,19 +76,12 @@ const SUPERVISORS = [
 const TeamSection = () => (
   <section id="team" className="section-border-top py-24 px-4 bg-gradient-to-b from-[#030508]/40 to-transparent">
     <div className="max-w-6xl mx-auto">
-      <ScrollReveal>
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-            The Team
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-            Meet the <span className="gradient-text-coral text-glow-coral">Builders</span>
-          </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-            Group 11 — Faculty of Computing, Sabaragamuwa University of Sri Lanka
-          </p>
-        </div>
-      </ScrollReveal>
+      <SectionHeader
+        badge="The Team"
+        titleStart="Meet the"
+        highlight="Builders"
+        subtitle="Group 11 — Faculty of Computing, Sabaragamuwa University of Sri Lanka"
+      />
 
       {/* Team Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">

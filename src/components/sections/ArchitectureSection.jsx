@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Laptop, Network, Cpu, FolderGit, Database, Layers, Radio, Container, Key } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import SectionHeader from '../SectionHeader';
 
 const LAYERS = [
   {
@@ -80,19 +81,12 @@ const ArchitectureSection = () => {
   return (
     <section id="architecture" className="section-border-top py-24 px-4 bg-gradient-to-b from-transparent to-[#030508]/40">
       <div className="max-w-6xl mx-auto">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-              Software Architecture
-            </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              System <span className="gradient-text-coral text-glow-coral">Architecture</span>
-            </h2>
-            <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-              Hover over each layer of the interactive 3D stack to trace data flow through the NearU platform.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeader
+          badge="Software Architecture"
+          titleStart="System"
+          highlight="Architecture"
+          subtitle="Hover over each layer of the interactive 3D stack to trace data flow through the NearU platform."
+        />
 
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           {/* Left Side: 3D Isometric Stack Visual */}
@@ -108,7 +102,11 @@ const ArchitectureSection = () => {
                   return (
                     <div
                       key={layer.id}
-                      className="isometric-layer absolute inset-0 rounded-2xl border flex flex-col justify-between p-4 cursor-pointer select-none"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`${layer.label}: ${layer.sublabel}`}
+                      aria-pressed={hoveredLayer === layer.id}
+                      className="isometric-layer absolute inset-0 rounded-2xl border flex flex-col justify-between p-4 cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
                       style={{
                         transform: `translateZ(${offsetZ + (isHovered ? 28 : 0)}px)`,
                         backgroundColor: isHovered ? layer.hoverBg : layer.bg,
@@ -120,6 +118,12 @@ const ArchitectureSection = () => {
                       }}
                       onMouseEnter={() => setHoveredLayer(layer.id)}
                       onClick={() => setHoveredLayer(layer.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setHoveredLayer(layer.id);
+                        }
+                      }}
                     >
                       {/* Isometric Grid Wireframe Overlay */}
                       <div className="absolute inset-0 bg-grid-glow opacity-10 rounded-2xl pointer-events-none" />

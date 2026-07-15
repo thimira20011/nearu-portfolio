@@ -1,7 +1,8 @@
 import React from 'react';
-import { Cpu, Globe, Smartphone, Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, Cpu, Globe, Smartphone } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
 import nearuLogo from '../../assets/logo.svg';
+import SectionHeader from '../SectionHeader';
 
 const REPOS = [
   {
@@ -36,19 +37,12 @@ const REPOS = [
 const FooterSection = () => (
   <section className="section-border-top py-24 px-4 bg-gradient-to-b from-transparent to-[#030508]/60">
     <div className="max-w-6xl mx-auto">
-      <ScrollReveal>
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-            Open Source
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-            Explore the <span className="gradient-text-coral text-glow-coral">Code</span>
-          </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-            All three repositories are publicly available. Star, fork, or contribute.
-          </p>
-        </div>
-      </ScrollReveal>
+      <SectionHeader
+        badge="Open Source"
+        titleStart="Explore the"
+        highlight="Code"
+        subtitle="All three repositories are publicly available. Star, fork, or contribute."
+      />
 
       {/* Repo Cards */}
       <div className="grid md:grid-cols-3 gap-6 mb-16">

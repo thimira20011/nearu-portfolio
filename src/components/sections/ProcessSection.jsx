@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import { 
   Terminal, 
   GitPullRequest, 
@@ -13,6 +13,7 @@ import {
   RefreshCw 
 } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import SectionHeader from '../SectionHeader';
 
 const PIPELINE_STEPS = [
   { icon: Terminal, label: 'Code', desc: 'Developer pushes to GitHub branch' },
@@ -33,19 +34,12 @@ const TESTING_TYPES = [
 const ProcessSection = () => (
   <section id="cicd" className="section-border-top py-24 px-4 bg-gradient-to-b from-transparent to-[#030508]/40">
     <div className="max-w-6xl mx-auto">
-      <ScrollReveal>
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-            DevOps
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-            CI/CD <span className="gradient-text-coral text-glow-coral">Pipeline</span>
-          </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-            A fully automated delivery pipeline ensures every commit is tested, built, and deployed with zero manual steps.
-          </p>
-        </div>
-      </ScrollReveal>
+      <SectionHeader
+        badge="DevOps"
+        titleStart="CI/CD"
+        highlight="Pipeline"
+        subtitle="A fully automated delivery pipeline ensures every commit is tested, built, and deployed with zero manual steps."
+      />
 
       {/* Pipeline Visualization */}
       <ScrollReveal>

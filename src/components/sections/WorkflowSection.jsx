@@ -1,5 +1,6 @@
 import React from 'react';
 import ScrollReveal from '../ScrollReveal';
+import SectionHeader from '../SectionHeader';
 
 const PHASES = [
   {
@@ -72,19 +73,12 @@ const PHASES = [
 const WorkflowSection = () => (
   <section id="timeline" className="section-border-top py-24 px-4">
     <div className="max-w-6xl mx-auto">
-      <ScrollReveal>
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-            Agile Workflow
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-            Project <span className="gradient-text-coral text-glow-coral">Timeline</span>
-          </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
-            Executed across 5 focused phases following Scrum methodology with clearly defined deliverables.
-          </p>
-        </div>
-      </ScrollReveal>
+      <SectionHeader
+        badge="Agile Workflow"
+        titleStart="Project"
+        highlight="Timeline"
+        subtitle="Executed across 5 focused phases following Scrum methodology with clearly defined deliverables."
+      />
 
       {/* Timeline */}
       <div className="relative">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const PlaceholderImage = ({
     width = '100%',
@@ -10,14 +10,12 @@ const PlaceholderImage = ({
     objectFitClass = 'object-cover',
     onClick
 }) => {
+    const [imgError, setImgError] = useState(false);
     const baseClasses = "flex items-center justify-center border-2 border-dashed border-gray-600 text-gray-400 font-semibold";
     const shapeClasses = shape === 'circle' ? 'rounded-full' : 'rounded-xl';
-    // Add conditional styling for clickable images
-    // The 'onClick' prop existence determines if cursor/hover effects are applied.
     const cursorClass = onClick ? 'cursor-zoom-in hover:shadow-lg hover:shadow-indigo-500/30 transition-shadow' : '';
 
-    if (imageUrl) {
-        // If a valid image URL is provided, render the image
+    if (imageUrl && !imgError) {
         return (
             <img
                 src={imageUrl}
@@ -25,13 +23,8 @@ const PlaceholderImage = ({
                 className={`${shapeClasses} w-full h-full ${objectFitClass} ${className} ${cursorClass}`}
                 style={{ width, height, minHeight: height, minWidth: width }}
                 loading="lazy"
-                onClick={onClick} // Attach click handler here (only if provided)
-                // Optional: Add onerror to handle broken links
-                onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.style.display = 'none'; // Hide broken image
-                    e.currentTarget.parentElement.innerHTML = `<div class="${baseClasses} ${shapeClasses} w-full h-full bg-red-900/50">Error Loading Image</div>`;
-                }}
+                onClick={onClick}
+                onError={() => setImgError(true)}
             />
         );
     }

@@ -54,8 +54,8 @@ const HeroSection = () => {
     resize();
     window.addEventListener('resize', resize);
 
-    // Create particles
-    for (let i = 0; i < 70; i++) {
+    // Create particles — 50 particles keeps good visual density while halving O(n²) connection cost
+    for (let i = 0; i < 50; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -269,7 +269,7 @@ const HeroSection = () => {
                   <circle cx="250" cy="250" r="8" fill="#ff785a" className="animate-pulse" />
 
                   {/* 1. Student Node (Left) */}
-                  <g className="cursor-pointer group" transform="translate(120, 185)">
+                  <g transform="translate(120, 185)" role="img" aria-label="Students">
                     {/* Pulsing ring */}
                     <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#fbbf24" strokeWidth="1" opacity="0.5" className="animate-ping" style={{ animationDuration: '3s' }} />
                     {/* Shadow ellipse */}
@@ -284,10 +284,12 @@ const HeroSection = () => {
                         <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" stroke="#fbbf24" strokeWidth="2.5" fill="none" />
                       </g>
                     </g>
+                    {/* Label */}
+                    <text y="20" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(251,191,36,0.75)" letterSpacing="0.5">Students</text>
                   </g>
 
                   {/* 2. Business Node (Right) */}
-                  <g className="cursor-pointer group" transform="translate(380, 185)">
+                  <g transform="translate(380, 185)" role="img" aria-label="Businesses">
                     {/* Pulsing ring */}
                     <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#e05638" strokeWidth="1" opacity="0.5" className="animate-ping" style={{ animationDuration: '3.5s' }} />
                     {/* Shadow ellipse */}
@@ -302,10 +304,12 @@ const HeroSection = () => {
                         <path d="M9 22V12h6v10" stroke="#ff785a" strokeWidth="2.5" fill="none" />
                       </g>
                     </g>
+                    {/* Label */}
+                    <text y="20" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(255,120,90,0.75)" letterSpacing="0.5">Businesses</text>
                   </g>
 
                   {/* 3. Rider Node (Bottom Center) */}
-                  <g className="cursor-pointer group" transform="translate(250, 370)">
+                  <g transform="translate(250, 370)" role="img" aria-label="Riders">
                     {/* Pulsing ring */}
                     <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#3b82f6" strokeWidth="1" opacity="0.5" className="animate-ping" style={{ animationDuration: '4s' }} />
                     {/* Shadow ellipse */}
@@ -322,6 +326,8 @@ const HeroSection = () => {
                         <path d="M12 9l3-4h3.5" stroke="#60a5fa" strokeWidth="2.5" fill="none" />
                       </g>
                     </g>
+                    {/* Label */}
+                    <text y="20" textAnchor="middle" fontSize="10" fontWeight="700" fill="rgba(96,165,250,0.75)" letterSpacing="0.5">Riders</text>
                   </g>
                 </g>
               </svg>

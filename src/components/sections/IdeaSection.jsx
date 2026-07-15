@@ -1,6 +1,7 @@
 import React from 'react';
 import { GraduationCap, Store, Car, Briefcase, Check } from 'lucide-react';
 import ScrollReveal from '../ScrollReveal';
+import SectionHeader from '../SectionHeader';
 
 const PROBLEMS = [
   { icon: GraduationCap, title: 'Fragmented Discovery', desc: 'Students waste time searching across platforms for food, transport, hostels, and accommodation near campus.' },
@@ -21,19 +22,14 @@ const SOLUTIONS = [
 const OverviewSection = () => (
   <section id="overview" className="section-border-top py-24 px-4">
     <div className="max-w-6xl mx-auto">
-      <ScrollReveal>
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-brand-coral/10 border border-brand-coral/25 text-brand-coral-light text-sm font-semibold mb-4">
-            Project Overview
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-            The <span className="gradient-text-coral text-glow-coral">Problem</span> We Solved
-          </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
-            NearU was born from a real need at Sabaragamuwa University — bridging the gap between students and local services.
-          </p>
-        </div>
-      </ScrollReveal>
+      <SectionHeader
+        badge="Project Overview"
+        titleStart="The"
+        highlight="Problem"
+        titleEnd="We Solved"
+        subtitle="NearU was born from a real need at Sabaragamuwa University — bridging the gap between students and local services."
+        maxWidth="max-w-2xl"
+      />
 
       {/* Problem Cards */}
       <div className="grid sm:grid-cols-2 gap-6 mb-20">
